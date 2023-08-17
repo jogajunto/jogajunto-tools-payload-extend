@@ -39,6 +39,7 @@ O jogajunto-tools-payload-extend também fornece utilitários para criar hooks e
 A função formatSlug permite criar slugs automaticamente com base em campos específicos. Ela também se encarrega de remover acentos e caracteres especiais.
 
 Uso:
+
 ```typescript
 import formatSlug from 'jogajunto-tools-payload-extend/src/utilities/formatSlug';
 
@@ -73,6 +74,10 @@ Estamos constantemente expandindo e adicionando novas utilidades ao pacote. Cert
 
 - formatMarkdown(doc, collectionName, payload, formatters): Formata um documento em Markdown.
 - formatSlug(fallback): Formata e limpa um slug, removendo acentos e caracteres especiais.
+
+### Documentação
+
+https://jogajunto.github.io/jogajunto-tools-payload-extend/
 
 ### Contribuição
 
