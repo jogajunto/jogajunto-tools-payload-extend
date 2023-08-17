@@ -34,7 +34,7 @@ Este pacote fornece vários tipos de TypeScript para ajudá-lo a tipar seus dado
 
 O jogajunto-tools-payload-extend também fornece utilitários para criar hooks e fields no Payload CMS. Estes são essenciais para estender e personalizar o comportamento padrão do CMS.
 
-### formatSlug
+#### formatSlug
 
 A função formatSlug permite criar slugs automaticamente com base em campos específicos. Ela também se encarrega de remover acentos e caracteres especiais.
 
