@@ -1,4 +1,6 @@
-// collections.d.ts
+/**
+ * Define os nomes possíveis para as coleções.
+ */
 export type CollectionName =
   | 'categories'
   | 'users'
