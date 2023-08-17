@@ -3,10 +3,22 @@
   "version": "1.0.0",
   "description": "Biblioteca para modularizar componentes do Payload CMS.",
   "main": "src/index.ts",
+  "license": "MIT",
   "scripts": {
     "build": "tsc"
   },
   "dependencies": {
-    
+    "@types/js-yaml": "^4.0.5",
+    "payload": "^1.13.4",
+    "dotenv": "^8.2.0",
+    "cross-env": "^7.0.3",
+    "axios": "^1.4.0",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.195",
+    "ts-node": "^9.1.1",
+    "prettier": "^3.0.0"
   }
 }
