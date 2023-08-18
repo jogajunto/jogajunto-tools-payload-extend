@@ -68,7 +68,7 @@ Estamos constantemente expandindo e adicionando novas utilidades ao pacote. Cert
 
 #### GitHub
 
-- sendAction(data: GitData): Dispara uma ação no GitHub, seja para criar um issue, PR, ou qualquer outra automação que você tenha configurado.
+- sendAction(data: GitData): Dispara uma ação no GitHub, para criar o markdown file e colocar imagens no repositório
 
 #### Formatação
 
