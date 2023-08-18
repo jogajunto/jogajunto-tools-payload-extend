@@ -6,8 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "docs": "typedoc --entryPointStrategy expand",
-    "postinstall": "tsc"
+    "docs": "typedoc --entryPointStrategy expand"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
