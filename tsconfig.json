@@ -1,24 +1,21 @@
 {
   "compilerOptions": {
+    "module": "ESNext",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "./dist",
     "declaration": true,
-    "jsx": "react",
+    "jsx": "react"
     // outras configurações aqui
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"],
   "ts-node": {
     "transpileOnly": true,
-    "swc": true,
+    "swc": true
   }
 }
