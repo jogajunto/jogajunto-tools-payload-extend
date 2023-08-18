@@ -1,4 +1,4 @@
-import { ClientPayload } from '.';
+import { ClientPayload } from './ClientPayload';
 
 /**
  * Define os dados para o hook globalAfterChange, relacionado ao Git.
