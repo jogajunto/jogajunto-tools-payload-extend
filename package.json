@@ -15,10 +15,12 @@
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "js-yaml": "^4.1.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "payload": "^1.11.3"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.195",
+    "@types/node": "^20.5.0",
     "prettier": "^3.0.0",
     "ts-node": "^9.1.1",
     "typedoc": "^0.24.8",
