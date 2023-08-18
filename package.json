@@ -4,6 +4,7 @@
   "description": "Biblioteca para modularizar componentes do Payload CMS.",
   "main": "src/index.ts",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "docs": "typedoc --entryPointStrategy expand"
