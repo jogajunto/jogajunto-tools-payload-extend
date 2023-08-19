@@ -49,7 +49,12 @@ const globalAfterChange = (
         console.log('The document was changed.');
 
         // Formata o documento para markdown
-        const markdownFile = await formatMarkdown(doc, collectionName, payload, collectionFormatters);
+        const markdownFile = await formatMarkdown(
+          doc,
+          collectionName,
+          payload,
+          collectionFormatters
+        );
 
         // Verifica se a imagem foi alterada
         if (oldDoc.image || newDoc.image) {
