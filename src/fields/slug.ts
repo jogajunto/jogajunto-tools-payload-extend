@@ -4,7 +4,7 @@ import formatSlug from '../utilities/formatSlug';
 /**
  * Representa o campo "slug".
  */
-export const slug: Field = {
+const slug: Field = {
   name: 'slug',
   label: 'Slug',
   type: 'text',
@@ -29,3 +29,5 @@ export const createSlugField = (fieldParam: string): Field => ({
     beforeValidate: [formatSlug(fieldParam)],
   },
 });
+
+export default slug;
