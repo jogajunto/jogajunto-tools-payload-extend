@@ -41,4 +41,3 @@ var createSlugField = function (fieldParam) { return (__assign(__assign({}, slug
         beforeValidate: [(0, formatSlug_1.default)(fieldParam)],
     } })); };
 exports.createSlugField = createSlugField;
-exports.default = slug;
