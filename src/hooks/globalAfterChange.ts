@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import { CollectionAfterChangeHook } from 'payload/types';
 import formatMarkdown from '../utilities/formatMarkdown';
-import { GitData } from '../types';
+import { GitData, ImageType } from '../types';
 import sendAction from '../utilities/actions/github/sendAction';
 import { CollectionName } from '../types/CollectionName';
 
@@ -27,7 +27,7 @@ const globalAfterChange = (
       let newDoc = _.omit(doc, ['updatedAt']);
 
       // Inicia a variavel null para se não existir newDoc.image
-      let image = null;
+      let image: ImageType | any = null;
 
       // Pega a imagem de começo pois vai ser utlizada em varias partes
       if (
