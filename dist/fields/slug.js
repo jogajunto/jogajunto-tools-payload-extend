@@ -14,12 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createSlugField = exports.slug = void 0;
+exports.createSlugField = void 0;
 var formatSlug_1 = __importDefault(require("../utilities/formatSlug"));
 /**
  * Representa o campo "slug".
  */
-exports.slug = {
+var slug = {
     name: 'slug',
     label: 'Slug',
     type: 'text',
@@ -37,7 +37,8 @@ exports.slug = {
  * @param fieldParam O campo utilizado como base para formatação do slug.
  * @returns Uma definição de campo "slug" customizada.
  */
-var createSlugField = function (fieldParam) { return (__assign(__assign({}, exports.slug), { hooks: {
+var createSlugField = function (fieldParam) { return (__assign(__assign({}, slug), { hooks: {
         beforeValidate: [(0, formatSlug_1.default)(fieldParam)],
     } })); };
 exports.createSlugField = createSlugField;
+exports.default = slug;
