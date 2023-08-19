@@ -12,7 +12,7 @@
     "jsx": "react"
     // outras configurações aqui
   },
-  "include": ["src/**/*.ts"],
+  "include": ["dist/**/*"],
   "exclude": ["node_modules"],
   "ts-node": {
     "transpileOnly": true,
