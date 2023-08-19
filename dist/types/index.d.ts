@@ -4,3 +4,4 @@ export { DiscordDataInfo } from './DiscordDataInfo';
 export { ClientPayload } from './ClientPayload';
 export { EmailHTMLCTA } from './EmailHTMLCTA';
 export { EmailHTMLData } from './EmailHTMLData';
+export { ImageType } from './ImageType';

@@ -1,10 +1,21 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSlugField = exports.slug = void 0;
-const formatSlug_1 = __importDefault(require("../utilities/formatSlug"));
+var formatSlug_1 = __importDefault(require("../utilities/formatSlug"));
 /**
  * Representa o campo "slug".
  */
@@ -26,7 +37,7 @@ exports.slug = {
  * @param fieldParam O campo utilizado como base para formatação do slug.
  * @returns Uma definição de campo "slug" customizada.
  */
-const createSlugField = (fieldParam) => (Object.assign(Object.assign({}, exports.slug), { hooks: {
+var createSlugField = function (fieldParam) { return (__assign(__assign({}, exports.slug), { hooks: {
         beforeValidate: [(0, formatSlug_1.default)(fieldParam)],
-    } }));
+    } })); };
 exports.createSlugField = createSlugField;

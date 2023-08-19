@@ -1,28 +1,33 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const removeAccents = (str) => {
-    const accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ';
-    const accentsOut = 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn';
+var removeAccents = function (str) {
+    var accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ';
+    var accentsOut = 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn';
     return str
         .split('')
-        .map((letter, index) => {
-        const accentIndex = accents.indexOf(letter);
+        .map(function (letter, index) {
+        var accentIndex = accents.indexOf(letter);
         return accentIndex !== -1 ? accentsOut[accentIndex] : letter;
     })
         .join('');
 };
-const format = (val) => removeAccents(val)
-    .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '')
-    .toLowerCase();
-const formatSlug = (fallback) => ({ value, originalDoc, data }) => {
-    if (typeof value === 'string') {
-        return format(value);
-    }
-    const fallbackData = (data && data[fallback]) || (originalDoc && originalDoc[fallback]);
-    if (fallbackData && typeof fallbackData === 'string') {
-        return format(fallbackData);
-    }
-    return value;
+var format = function (val) {
+    return removeAccents(val)
+        .replace(/ /g, '-')
+        .replace(/[^\w-]+/g, '')
+        .toLowerCase();
+};
+var formatSlug = function (fallback) {
+    return function (_a) {
+        var value = _a.value, originalDoc = _a.originalDoc, data = _a.data;
+        if (typeof value === 'string') {
+            return format(value);
+        }
+        var fallbackData = (data && data[fallback]) || (originalDoc && originalDoc[fallback]);
+        if (fallbackData && typeof fallbackData === 'string') {
+            return format(fallbackData);
+        }
+        return value;
+    };
 };
 exports.default = formatSlug;
