@@ -1,12 +1,11 @@
 {
-    "out": "docs",
-    "entryPoints": ["src"],
-    "exclude": ["**/*.spec.ts"],
-    "name": "jogajunto-tools-payload-extend",
-    "readme": "README.md",
-    "theme": "default",
-    "excludePrivate": true,
-    "excludeProtected": true,
-    "excludeExternals": true
-  }
-  
+  "out": "docs",
+  "entryPoints": ["dist"],
+  "exclude": ["**/*.spec.ts"],
+  "name": "jogajunto-tools-payload-extend",
+  "readme": "README.md",
+  "theme": "default",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true
+}
