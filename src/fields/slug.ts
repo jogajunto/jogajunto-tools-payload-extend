@@ -29,5 +29,3 @@ export const createSlugField = (fieldParam: string): Field => ({
     beforeValidate: [formatSlug(fieldParam)],
   },
 });
-
-export default slug;
