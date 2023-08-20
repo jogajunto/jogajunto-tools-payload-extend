@@ -39,6 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.globalAfterChange = void 0;
 // Importações necessárias
 var lodash_1 = __importDefault(require("lodash"));
 var formatMarkdown_1 = __importDefault(require("../utilities/formatMarkdown"));
@@ -127,5 +128,4 @@ directoryImage // Imagem do diretório, se houver
         });
     };
 };
-// Exporta o hook
-exports.default = globalAfterChange;
+exports.globalAfterChange = globalAfterChange;

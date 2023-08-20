@@ -3,5 +3,4 @@
  */
 import { CollectionAfterChangeHook } from 'payload/types';
 import { CollectionName } from '../types/CollectionName';
-declare const mediaAfterChange: (collectionName: CollectionName, directory: string) => CollectionAfterChangeHook;
-export default mediaAfterChange;
+export declare const mediaAfterChange: (collectionName: CollectionName, directory: string) => CollectionAfterChangeHook;

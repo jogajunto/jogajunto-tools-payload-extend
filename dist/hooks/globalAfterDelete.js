@@ -39,6 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.globalAfterDelete = void 0;
 var sendAction_1 = __importDefault(require("../utilities/actions/github/sendAction"));
 var globalAfterDelete = function (collectionName, // Nome da coleção que está sendo modificada
 directory // Diretório que está sendo modificado
@@ -65,5 +66,4 @@ directory // Diretório que está sendo modificado
         });
     };
 };
-// Exporta o hook
-exports.default = globalAfterDelete;
+exports.globalAfterDelete = globalAfterDelete;

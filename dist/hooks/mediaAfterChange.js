@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mediaAfterChange = void 0;
 // Hook que sera executado após a alteração de um doc que representa somente uma media, para envio ao repositório do Github
 var mediaAfterChange = function (collectionName, // Nome da coleção que está sendo modificada
 directory // Diretório que está sendo modificado
@@ -52,5 +53,4 @@ directory // Diretório que está sendo modificado
         });
     };
 };
-// Exporta o hook
-exports.default = mediaAfterChange;
+exports.mediaAfterChange = mediaAfterChange;
