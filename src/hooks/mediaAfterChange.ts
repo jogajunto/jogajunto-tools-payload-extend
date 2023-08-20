@@ -5,7 +5,7 @@ import { CollectionAfterChangeHook } from 'payload/types';
 import { CollectionName } from '../types/CollectionName';
 
 // Hook que sera executado após a alteração de um doc que representa somente uma media, para envio ao repositório do Github
-const mediaAfterChange = (
+export const mediaAfterChange = (
   collectionName: CollectionName, // Nome da coleção que está sendo modificada
   directory: string // Diretório que está sendo modificado
 ): CollectionAfterChangeHook => {
@@ -19,6 +19,3 @@ const mediaAfterChange = (
     return doc;
   };
 };
-
-// Exporta o hook
-export default mediaAfterChange;

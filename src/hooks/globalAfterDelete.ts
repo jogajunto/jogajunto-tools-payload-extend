@@ -3,7 +3,7 @@ import { GitData } from '../types';
 import sendAction from '../utilities/actions/github/sendAction';
 import formatSlug from '../utilities/formatSlug';
 
-const globalAfterDelete = (
+export const globalAfterDelete = (
   collectionName: string, // Nome da coleção que está sendo modificada
   directory: string // Diretório que está sendo modificado
 ): CollectionAfterDeleteHook => {
@@ -26,6 +26,3 @@ const globalAfterDelete = (
     return doc;
   };
 };
-
-// Exporta o hook
-export default globalAfterDelete;

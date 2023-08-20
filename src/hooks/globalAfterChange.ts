@@ -7,7 +7,7 @@ import sendAction from '../utilities/actions/github/sendAction';
 import { CollectionName } from '../types/CollectionName';
 
 // Hook que será executado depois que um documento for alterado
-const globalAfterChange = (
+export const globalAfterChange = (
   collectionName: CollectionName, // Nome da coleção que está sendo modificada
   directory: string, // Diretório que está sendo modificado
   collectionFormatters: Object, // Objeto com as funções de preparação para cada collections formatar seu markdown
@@ -108,6 +108,3 @@ const globalAfterChange = (
     return doc;
   };
 };
-
-// Exporta o hook
-export default globalAfterChange;
