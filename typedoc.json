@@ -1,6 +1,6 @@
 {
   "out": "docs",
-  "entryPoints": ["dist"],
+  "entryPoints": ["src"],
   "exclude": ["**/*.spec.ts"],
   "name": "jogajunto-tools-payload-extend",
   "readme": "README.md",
