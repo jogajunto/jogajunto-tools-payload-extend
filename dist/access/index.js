@@ -20,6 +20,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Este arquivo atua como um ponto de entrada único para todas as funções relacionadas
  * a verificações de acesso, permitindo importações mais limpas em outros lugares
  * do projeto.
+ *
+ * @module access
  */
 __exportStar(require("./isAdmin"), exports);
 __exportStar(require("./isAuthenticated"), exports);
