@@ -1,7 +1,6 @@
 import { CollectionAfterDeleteHook } from 'payload/types';
 import { GitData } from '../types';
 import sendAction from '../utilities/actions/github/sendAction';
-import formatSlug from '../utilities/formatSlug';
 
 export const globalAfterDelete = (
   collectionName: string, // Nome da coleção que está sendo modificada
