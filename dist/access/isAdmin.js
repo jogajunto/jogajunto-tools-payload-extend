@@ -7,10 +7,8 @@ exports.isAdminFieldLevel = exports.isAdmin = void 0;
  * @param {Object} req - O objeto de solicitação com informações do usuário.
  * @returns {boolean} Retorna verdadeiro se o usuário tem o papel de 'admin', caso contrário, retorna falso.
  */
-var isAdmin = function (_a) {
-    var _b;
-    var user = _a.req.user;
-    return Boolean((_b = user === null || user === void 0 ? void 0 : user.roles) === null || _b === void 0 ? void 0 : _b.includes('admin'));
+const isAdmin = ({ req: { user } }) => {
+    return Boolean(user?.roles?.includes('admin'));
 };
 exports.isAdmin = isAdmin;
 /**
@@ -22,9 +20,7 @@ exports.isAdmin = isAdmin;
  * @param {Object} req - O objeto de solicitação com informações do usuário.
  * @returns {boolean} Retorna verdadeiro se o usuário tem o papel de 'admin', caso contrário, retorna falso.
  */
-var isAdminFieldLevel = function (_a) {
-    var _b;
-    var user = _a.req.user;
-    return Boolean((_b = user === null || user === void 0 ? void 0 : user.roles) === null || _b === void 0 ? void 0 : _b.includes('admin'));
+const isAdminFieldLevel = ({ req: { user } }) => {
+    return Boolean(user?.roles?.includes('admin'));
 };
 exports.isAdminFieldLevel = isAdminFieldLevel;

@@ -1,3 +1,3 @@
 import { GitData } from '../../../types';
-declare const sendAction: (data: GitData) => Promise<void>;
+declare const sendAction: (dataToSend: GitData) => Promise<void>;
 export default sendAction;
