@@ -11,13 +11,12 @@ exports.isEditor = exports.isEditorOrOwnsDocument = void 0;
  * @param {Object} req - O objeto de solicitação com informações do usuário.
  * @returns {boolean|Object} Retorna verdadeiro se tiver permissão total, um objeto de condição se for restrito, ou falso para negar acesso.
  */
-var isEditorOrOwnsDocument = function (_a) {
-    var _b, _c;
-    var req = _a.req;
-    var user = req.user;
-    if (Boolean((_b = user === null || user === void 0 ? void 0 : user.roles) === null || _b === void 0 ? void 0 : _b.includes('admin')))
+const isEditorOrOwnsDocument = ({ req }) => {
+    var _a, _b;
+    const user = req.user;
+    if (Boolean((_a = user === null || user === void 0 ? void 0 : user.roles) === null || _a === void 0 ? void 0 : _a.includes('admin')))
         return true;
-    if (Boolean((_c = user === null || user === void 0 ? void 0 : user.roles) === null || _c === void 0 ? void 0 : _c.includes('editor'))) {
+    if (Boolean((_b = user === null || user === void 0 ? void 0 : user.roles) === null || _b === void 0 ? void 0 : _b.includes('editor'))) {
         return {
             id: {
                 equals: user.id,
@@ -33,9 +32,8 @@ exports.isEditorOrOwnsDocument = isEditorOrOwnsDocument;
  * @param {Object} req - O objeto de solicitação com informações do usuário.
  * @returns {boolean} Retorna verdadeiro se o usuário tem o papel de 'editor', caso contrário, retorna falso.
  */
-var isEditor = function (_a) {
-    var _b, _c;
-    var req = _a.req;
-    return Boolean((_c = (_b = req.user) === null || _b === void 0 ? void 0 : _b.roles) === null || _c === void 0 ? void 0 : _c.includes('editor'));
+const isEditor = ({ req }) => {
+    var _a, _b;
+    return Boolean((_b = (_a = req.user) === null || _a === void 0 ? void 0 : _a.roles) === null || _b === void 0 ? void 0 : _b.includes('editor'));
 };
 exports.isEditor = isEditor;
