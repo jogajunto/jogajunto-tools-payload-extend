@@ -10,7 +10,8 @@ exports.isAuthenticated = void 0;
  * @param {Object} req - O objeto de solicitação com informações do usuário.
  * @returns {boolean} Retorna verdadeiro se o usuário está autenticado, caso contrário, retorna falso.
  */
-const isAuthenticated = ({ req }) => {
+var isAuthenticated = function (_a) {
+    var req = _a.req;
     return Boolean(req.user);
 };
 exports.isAuthenticated = isAuthenticated;
