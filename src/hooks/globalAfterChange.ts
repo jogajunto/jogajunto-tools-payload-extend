@@ -75,26 +75,8 @@ export const globalAfterChange = (
         };
 
         if (updateImage && directoryImage && image.url) {
-          // Adiciona a imagem à payload do cliente
-          data.client_payload.image = image.url;
-          const url = image.url;
-          const parts = url.split('/');
-          const filename = parts[parts.length - 1];
-          const filenameParts = filename.split('.');
-          const extension = filenameParts.pop(); // Remove a extensão
-
-          if (extension) {
-            data.client_payload.image_extension = extension;
+            data = await prepareImageForRepository(data, directoryImage, image);
           }
-
-          const nameWithoutExtension = filenameParts.join('.'); // Junta o resto sem a extensão
-
-          if (nameWithoutExtension) {
-            data.client_payload.image_filename = nameWithoutExtension;
-          }
-
-          data.client_payload.directory_image = directoryImage;
-        }
 
         // Envia para o Github Actions
         sendAction(data);
