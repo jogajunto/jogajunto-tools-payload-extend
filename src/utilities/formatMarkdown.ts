@@ -3,12 +3,13 @@ import _ from 'lodash';
 import { Document } from 'payload/types';
 import { CollectionName } from '../types/CollectionName';
 import { Payload } from 'payload';
+import { FormatterCollection } from '../types/FormatterCollection';
 
 const formatMarkdown = async (
   doc: Document,
   collectionName: CollectionName,
   payload: Payload,
-  formatters: Object
+  formatters: Record<CollectionName, FormatterCollection>
 ) => {
   const dataFormatter = formatters[collectionName];
   if (!dataFormatter) {
@@ -45,9 +46,9 @@ const formatMarkdown = async (
 
       case 'ul':
         // Block type UL
-        block.children.forEach((listItem) => {
+        block.children.forEach((listItem: any) => {
           content += '- ';
-          listItem.children.forEach((child) => {
+          listItem.children.forEach((child: any) => {
             let text = child.text;
 
             if (child.bold) {
@@ -59,7 +60,7 @@ const formatMarkdown = async (
             }
 
             if (child.type === 'link') {
-              child.children.forEach((linkChild) => {
+              child.children.forEach((linkChild: any) => {
                 text = `[${linkChild.text}](${child.url})`;
               });
             }
@@ -73,7 +74,7 @@ const formatMarkdown = async (
       default:
         if (block.children.text != '') {
           // Block type any
-          block.children.forEach((child) => {
+          block.children.forEach((child: any) => {
             let text = child.text;
 
             if (child.bold) {

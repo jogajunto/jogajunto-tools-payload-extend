@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import { CollectionAfterChangeHook } from 'payload/types';
 import formatMarkdown from '../utilities/formatMarkdown';
-import { GitData, ImageType } from '../types';
+import { FormatterCollection, GitData, ImageType } from '../types';
 import sendAction from '../utilities/actions/github/sendAction';
 import { CollectionName } from '../types/CollectionName';
 import prepareImageForRepository from '../utilities/prepareImageForRepository';
@@ -11,7 +11,7 @@ import prepareImageForRepository from '../utilities/prepareImageForRepository';
 export const globalAfterChange = (
   collectionName: CollectionName, // Nome da coleção que está sendo modificada
   directory: string, // Diretório que está sendo modificado
-  collectionFormatters: Object, // Objeto com as funções de preparação para cada collections formatar seu markdown
+  collectionFormatters: Record<CollectionName, FormatterCollection>, // Objeto com as funções de preparação para cada collections formatar seu markdown
   collectionUploadName?: CollectionName, // Nome da colleção para o upload de imagem que esta sendo relacionada
   directoryImage?: string // Imagem do diretório, se houver
 ): CollectionAfterChangeHook => {
@@ -91,10 +91,14 @@ export const globalAfterChange = (
       // Retorna o documento modificado
       return doc;
     } catch (error) {
-      console.error(
-        'Erro durante o processo de alteração global:',
-        error.message
-      );
+      if (error instanceof Error) {
+        console.error(
+          'Erro durante o processo de alteração global:',
+          error.message
+        );
+      } else {
+        console.error('Erro durante o processo de alteração global:', error);
+      }
       // Dependendo do que você deseja fazer quando um erro ocorre, você pode:
       // 1. Rethrow o erro se desejar que ele seja tratado por um manipulador de erros de nível superior
       // throw error;

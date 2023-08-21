@@ -1,6 +1,6 @@
 import { FieldHook } from 'payload/types';
 
-export const removeAccents = (str) => {
+export const removeAccents = (str: string) => {
   const accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ';
   const accentsOut = 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn';
   return str

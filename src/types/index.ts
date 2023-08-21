@@ -5,3 +5,4 @@ export { ClientPayload } from './ClientPayload';
 export { EmailHTMLCTA } from './EmailHTMLCTA';
 export { EmailHTMLData } from './EmailHTMLData';
 export { ImageType } from './ImageType';
+export { FormatterCollection } from './FormatterCollection';

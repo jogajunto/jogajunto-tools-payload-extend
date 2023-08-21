@@ -28,10 +28,14 @@ const prepareImageForRepository = async (
     return data;
   } catch (error) {
     /* Tratamento de erro em prepareImageForRepository */
-    console.error(
-      'Erro ao preparar a imagem para o repositório:',
-      error.message
-    );
+    if (error instanceof Error) {
+      console.error(
+        'Erro ao preparar a imagem para o repositório:',
+        error.message
+      );
+    } else {
+      console.error('Erro ao preparar a imagem para o repositório:', error);
+    }
     throw error;
   }
 };

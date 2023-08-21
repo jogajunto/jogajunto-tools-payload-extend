@@ -3,6 +3,11 @@ import axios from 'axios';
 const webhookURL = process.env.DISCORD_CODENZBOT_WEBHOOK;
 
 const sendAxios = (message: string, beforeMessage?: string) => {
+  if (!webhookURL) {
+    console.error('WEBHOOK_URL não está definido.');
+    return;
+  }
+
   let getBeforeMessage = beforeMessage;
   let content = getBeforeMessage
     ? `${getBeforeMessage} ${message}`
