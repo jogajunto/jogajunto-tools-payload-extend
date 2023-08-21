@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./formatMarkdown"), exports);
 __exportStar(require("./formatSlug"), exports);
 __exportStar(require("./prepareImageForRepository"), exports);
+__exportStar(require("./formatSlugString"), exports);

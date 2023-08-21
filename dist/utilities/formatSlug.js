@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatSlugString = exports.formatSlug = exports.format = exports.removeAccents = void 0;
+exports.formatSlug = exports.format = exports.removeAccents = void 0;
 const removeAccents = (str) => {
     const accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ';
     const accentsOut = 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn';
@@ -29,7 +29,3 @@ const formatSlug = (fallback) => ({ value, originalDoc, data }) => {
     return value;
 };
 exports.formatSlug = formatSlug;
-const formatSlugString = (val) => {
-    return (0, exports.format)(val);
-};
-exports.formatSlugString = formatSlugString;
