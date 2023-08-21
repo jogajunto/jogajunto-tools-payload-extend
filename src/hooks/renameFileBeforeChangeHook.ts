@@ -1,7 +1,7 @@
-import { BeforeChangeHook } from 'payload/dist/collections/config/types';
+import { CollectionBeforeChangeHook } from 'payload/types';
 import { format } from '../utilities/formatSlug';
 
-export const renameFileBeforeChangeHook: BeforeChangeHook = async ({
+export const renameFileBeforeChangeHook: CollectionBeforeChangeHook = async ({
   data,
   req,
   operation,
