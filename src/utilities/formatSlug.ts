@@ -1,6 +1,6 @@
 import { FieldHook } from 'payload/types';
 
-export const removeAccents = (str) => {
+const removeAccents = (str) => {
   const accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ';
   const accentsOut = 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn';
   return str
@@ -12,13 +12,13 @@ export const removeAccents = (str) => {
     .join('');
 };
 
-export const format = (val: string): string =>
+const format = (val: string): string =>
   removeAccents(val)
     .replace(/ /g, '-')
     .replace(/[^\w-]+/g, '')
     .toLowerCase();
 
-export const formatSlug =
+const formatSlug =
   (fallback: string): FieldHook =>
   ({ value, originalDoc, data }) => {
     if (typeof value === 'string') {
@@ -33,3 +33,9 @@ export const formatSlug =
 
     return value;
   };
+
+export default {
+  formatSlug,
+  format,
+  removeAccents,
+};
