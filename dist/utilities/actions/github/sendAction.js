@@ -19,8 +19,8 @@ const sendAction = async (dataToSend) => {
         const response = await axios_1.default.post(repositoryDispatchURL, dataToSend, {
             headers,
         });
-        console.log('response.status', response.status);
-        if (response.status === 200 && response?.config?.data) {
+        if ((response.status === 200 && response?.config?.data) ||
+            (response.status === 204 && response?.config?.data)) {
             const responseData = JSON.parse(response.config.data);
             let info = `Tipo de evento: \`${responseData.event_type}\` | Slug: \`${responseData.client_payload.slug}\` | Diretório: \`${responseData.client_payload.directory}\``;
             const discordInfo = { message: info };
