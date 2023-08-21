@@ -33,3 +33,7 @@ export const formatSlug =
 
     return value;
   };
+
+export const formatSlugString = (val: string): string => {
+  return format(val);
+};
