@@ -10,9 +10,13 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSlugField = void 0;
-var formatSlug_1 = require("../utilities/formatSlug");
+var formatSlug_1 = __importDefault(require("../utilities/formatSlug"));
+var formatSlug = formatSlug_1.default.formatSlug;
 /**
  * Representa o campo "slug".
  */
@@ -25,7 +29,7 @@ var slug = {
         description: 'Slug gerado de forma automática ao salvar o post',
     },
     hooks: {
-        beforeValidate: [(0, formatSlug_1.formatSlug)('title')],
+        beforeValidate: [formatSlug('title')],
     },
     unique: true,
 };
@@ -35,6 +39,6 @@ var slug = {
  * @returns Uma definição de campo "slug" customizada.
  */
 var createSlugField = function (fieldParam) { return (__assign(__assign({}, slug), { hooks: {
-        beforeValidate: [(0, formatSlug_1.formatSlug)(fieldParam)],
+        beforeValidate: [formatSlug(fieldParam)],
     } })); };
 exports.createSlugField = createSlugField;
