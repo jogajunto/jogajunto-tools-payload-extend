@@ -37,15 +37,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.renameFileBeforeChangeHook = void 0;
-var formatSlug_1 = require("../utilities/formatSlug");
 var renameFileBeforeChangeHook = function (_a) {
-    var data = _a.data, req = _a.req, operation = _a.operation, originalDoc = _a.originalDoc, context = _a.context;
+    var data = _a.data, req = _a.req, originalDoc = _a.originalDoc;
     return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_b) {
             console.log('data', data);
-            if (operation === 'create' && data.filename) {
-                data.filename = (0, formatSlug_1.format)(data.filename);
-            }
             return [2 /*return*/, data];
         });
     });
