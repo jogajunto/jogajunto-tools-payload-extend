@@ -18,4 +18,3 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./globalAfterChange"), exports);
 __exportStar(require("./globalAfterDelete"), exports);
 __exportStar(require("./mediaAfterChange"), exports);
-__exportStar(require("./renameFileBeforeChangeHook"), exports);
