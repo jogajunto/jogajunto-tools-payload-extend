@@ -37,16 +37,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.renameFileBeforeChangeHook = void 0;
-var renameFileBeforeChangeHook = function (_a) {
-    var data = _a.data, // incoming data to update or create with
-    req = _a.req, // full express request
-    operation = _a.operation, // name of the operation ie. 'create', 'update'
-    originalDoc = _a.originalDoc;
-    return __awaiter(void 0, void 0, void 0, function () {
-        return __generator(this, function (_b) {
-            console.log('data', data);
-            return [2 /*return*/, data];
+var renameFileBeforeChangeHook = function () {
+    return function (_a) {
+        var data = _a.data, // incoming data to update or create with
+        req = _a.req, // full express request
+        operation = _a.operation, // name of the operation ie. 'create', 'update'
+        originalDoc = _a.originalDoc;
+        return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                console.log('data', data);
+                return [2 /*return*/, data];
+            });
         });
-    });
+    };
 };
 exports.renameFileBeforeChangeHook = renameFileBeforeChangeHook;
