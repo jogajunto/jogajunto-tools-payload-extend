@@ -3,4 +3,4 @@ import { Payload } from 'payload';
 export type FormatterCollection = (
   doc: Document,
   payload: Payload
-) => Promise<string>;
+) => Promise<any>;
