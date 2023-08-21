@@ -3,7 +3,7 @@ import utilsSlug from '../utilities/formatSlug';
 
 const { format } = utilsSlug;
 
-const renameFileBeforeChangeHook: BeforeChangeHook = ({
+export const renameFileBeforeChangeHook: BeforeChangeHook = ({
   data,
   req,
   operation,
@@ -18,5 +18,3 @@ const renameFileBeforeChangeHook: BeforeChangeHook = ({
   }
   return data;
 };
-
-export default renameFileBeforeChangeHook;
