@@ -44,6 +44,7 @@ exports.globalAfterChange = void 0;
 var lodash_1 = __importDefault(require("lodash"));
 var formatMarkdown_1 = __importDefault(require("../utilities/formatMarkdown"));
 var sendAction_1 = __importDefault(require("../utilities/actions/github/sendAction"));
+var prepareImageForRepository_1 = __importDefault(require("../utilities/prepareImageForRepository"));
 // Hook que será executado depois que um documento for alterado
 var globalAfterChange = function (collectionName, // Nome da coleção que está sendo modificada
 directory, // Diretório que está sendo modificado
@@ -56,11 +57,12 @@ directoryImage // Imagem do diretório, se houver
         previousDoc = _a.previousDoc, // Dados do documento antes de ser modificado
         operation = _a.operation;
         return __awaiter(void 0, void 0, void 0, function () {
-            var oldDoc, newDoc, image, updateImage, markdownFile, data, url, parts, filename, filenameParts, extension, nameWithoutExtension;
+            var oldDoc, newDoc, image, updateImage, markdownFile, data, error_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        if (!(operation === 'update' || operation === 'create')) return [3 /*break*/, 5];
+                        _b.trys.push([0, 8, , 9]);
+                        if (!(operation === 'update' || operation === 'create')) return [3 /*break*/, 7];
                         oldDoc = lodash_1.default.omit(previousDoc, ['_id', '__v', 'updatedAt']);
                         newDoc = lodash_1.default.omit(doc, ['updatedAt']);
                         image = null;
@@ -76,7 +78,7 @@ directoryImage // Imagem do diretório, se houver
                         _b.label = 2;
                     case 2:
                         updateImage = false;
-                        if (!!lodash_1.default.isEqual(newDoc, oldDoc)) return [3 /*break*/, 4];
+                        if (!!lodash_1.default.isEqual(newDoc, oldDoc)) return [3 /*break*/, 6];
                         console.log('The document was changed.');
                         return [4 /*yield*/, (0, formatMarkdown_1.default)(doc, collectionName, payload, collectionFormatters)];
                     case 3:
@@ -96,33 +98,27 @@ directoryImage // Imagem do diretório, se houver
                                 content: lodash_1.default.trim(markdownFile, '\n'),
                             },
                         };
-                        if (updateImage && directoryImage && image.url) {
-                            // Adiciona a imagem à payload do cliente
-                            data.client_payload.image = image.url;
-                            url = image.url;
-                            parts = url.split('/');
-                            filename = parts[parts.length - 1];
-                            filenameParts = filename.split('.');
-                            extension = filenameParts.pop();
-                            if (extension) {
-                                data.client_payload.image_extension = extension;
-                            }
-                            nameWithoutExtension = filenameParts.join('.');
-                            if (nameWithoutExtension) {
-                                data.client_payload.image_filename = nameWithoutExtension;
-                            }
-                            data.client_payload.directory_image = directoryImage;
-                        }
+                        if (!(updateImage && directoryImage && image.url)) return [3 /*break*/, 5];
+                        return [4 /*yield*/, (0, prepareImageForRepository_1.default)(data, directoryImage, image)];
+                    case 4:
+                        data = _b.sent();
+                        _b.label = 5;
+                    case 5:
                         // Envia para o Github Actions
                         (0, sendAction_1.default)(data);
-                        return [3 /*break*/, 5];
-                    case 4:
+                        return [3 /*break*/, 7];
+                    case 6:
                         // Log que o documento não teve alterações
                         console.log('The document was not changed.');
-                        _b.label = 5;
-                    case 5: 
+                        _b.label = 7;
+                    case 7: 
                     // Retorna o documento modificado
                     return [2 /*return*/, doc];
+                    case 8:
+                        error_1 = _b.sent();
+                        console.error('Erro durante o processo de alteração global:', error_1.message);
+                        return [3 /*break*/, 9];
+                    case 9: return [2 /*return*/];
                 }
             });
         });
