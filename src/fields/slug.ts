@@ -1,5 +1,7 @@
 import { Field } from 'payload/types';
-import { formatSlug } from '../utilities/formatSlug';
+import utils from '../utilities/formatSlug';
+
+const { formatSlug } = utils;
 
 /**
  * Representa o campo "slug".
