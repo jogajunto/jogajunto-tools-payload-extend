@@ -1,3 +1,4 @@
 import { FieldHook } from 'payload/types';
-declare const formatSlug: (fallback: string) => FieldHook;
-export default formatSlug;
+export declare const removeAccents: (str: any) => any;
+export declare const format: (val: string) => string;
+export declare const formatSlug: (fallback: string) => FieldHook;
