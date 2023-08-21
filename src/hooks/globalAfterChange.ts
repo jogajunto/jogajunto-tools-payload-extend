@@ -5,6 +5,7 @@ import formatMarkdown from '../utilities/formatMarkdown';
 import { GitData, ImageType } from '../types';
 import sendAction from '../utilities/actions/github/sendAction';
 import { CollectionName } from '../types/CollectionName';
+import prepareImageForRepository from '../utilities/prepareImageForRepository';
 
 // Hook que será executado depois que um documento for alterado
 export const globalAfterChange = (
@@ -20,73 +21,86 @@ export const globalAfterChange = (
     previousDoc, // Dados do documento antes de ser modificado
     operation, // Nome da operação, ex: 'create', 'update'
   }) => {
-    // Verifica se a operação é de criação ou atualização
-    if (operation === 'update' || operation === 'create') {
-      // Remove campos desnecessários dos documentos antigo e novo
-      let oldDoc = _.omit(previousDoc, ['_id', '__v', 'updatedAt']);
-      let newDoc = _.omit(doc, ['updatedAt']);
+    try {
+      // Verifica se a operação é de criação ou atualização
+      if (operation === 'update' || operation === 'create') {
+        // Remove campos desnecessários dos documentos antigo e novo
+        let oldDoc = _.omit(previousDoc, ['_id', '__v', 'updatedAt']);
+        let newDoc = _.omit(doc, ['updatedAt']);
 
-      // Inicia a variavel null para se não existir newDoc.image
-      let image: ImageType | any = null;
+        // Inicia a variavel null para se não existir newDoc.image
+        let image = null;
 
-      // Pega a imagem de começo pois vai ser utlizada em varias partes
-      if (
-        newDoc.image &&
-        collectionUploadName != null &&
-        collectionUploadName != undefined
-      ) {
-        image = await payload.findByID({
-          collection: collectionUploadName,
-          id: newDoc.image,
-        });
-      }
-
-      // Variável para verificar se a imagem foi atualizada
-      let updateImage = false;
-
-      // Verifica se o documento foi alterado
-      if (!_.isEqual(newDoc, oldDoc)) {
-        console.log('The document was changed.');
-
-        // Formata o documento para markdown
-        const markdownFile = await formatMarkdown(
-          doc,
-          collectionName,
-          payload,
-          collectionFormatters
-        );
-
-        // Verifica se a imagem foi alterada
-        if (oldDoc.image || newDoc.image) {
-          if (newDoc.image !== oldDoc.image) {
-            updateImage = true;
-          }
+        // Pega a imagem de começo pois vai ser utlizada em varias partes
+        if (
+          newDoc.image &&
+          collectionUploadName != null &&
+          collectionUploadName != undefined
+        ) {
+          image = await payload.findByID({
+            collection: collectionUploadName,
+            id: newDoc.image,
+          });
         }
 
-        // Prepara os dados para enviar para a Github Action
-        const data: GitData = {
-          event_type: operation,
-          client_payload: {
-            slug: doc.slug,
-            operation: operation,
-            directory: directory,
-            content: _.trim(markdownFile, '\n'),
-          },
-        };
+        // Variável para verificar se a imagem foi atualizada
+        let updateImage = false;
 
-        if (updateImage && directoryImage && image.url) {
+        // Verifica se o documento foi alterado
+        if (!_.isEqual(newDoc, oldDoc)) {
+          console.log('The document was changed.');
+
+          // Formata o documento para markdown
+          const markdownFile = await formatMarkdown(
+            doc,
+            collectionName,
+            payload,
+            collectionFormatters
+          );
+
+          // Verifica se a imagem foi alterada
+          if (oldDoc.image || newDoc.image) {
+            if (newDoc.image !== oldDoc.image) {
+              updateImage = true;
+            }
+          }
+
+          // Prepara os dados para enviar para a Github Action
+          let data: GitData = {
+            event_type: operation,
+            client_payload: {
+              slug: doc.slug,
+              operation: operation,
+              directory: directory,
+              content: _.trim(markdownFile, '\n'),
+            },
+          };
+
+          if (updateImage && directoryImage && image.url) {
             data = await prepareImageForRepository(data, directoryImage, image);
           }
 
-        // Envia para o Github Actions
-        sendAction(data);
-      } else {
-        // Log que o documento não teve alterações
-        console.log('The document was not changed.');
+          // Envia para o Github Actions
+          sendAction(data);
+        } else {
+          // Log que o documento não teve alterações
+          console.log('The document was not changed.');
+        }
       }
-    }
 
-    // Retorna o documento modificado
-    return doc;
+      // Retorna o documento modificado
+      return doc;
+    } catch (error) {
+      console.error(
+        'Erro durante o processo de alteração global:',
+        error.message
+      );
+      // Dependendo do que você deseja fazer quando um erro ocorre, você pode:
+      // 1. Rethrow o erro se desejar que ele seja tratado por um manipulador de erros de nível superior
+      // throw error;
+      // 2. Retornar uma resposta de erro ou algum valor padrão
+      // return { error: "Houve um erro durante o processo." };
+      // 3. Ou simplesmente registrar o erro e continuar a execução (já feito acima com console.error)
+    }
   };
 };
