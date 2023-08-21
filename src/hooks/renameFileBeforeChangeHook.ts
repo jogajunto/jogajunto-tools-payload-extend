@@ -1,7 +1,5 @@
 import { BeforeChangeHook } from 'payload/dist/collections/config/types';
-import utilsSlug from '../utilities/formatSlug';
-
-const { format } = utilsSlug;
+import { format } from '../utilities/formatSlug';
 
 export const renameFileBeforeChangeHook: BeforeChangeHook = ({
   data,
