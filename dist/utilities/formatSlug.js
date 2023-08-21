@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatSlug = exports.format = exports.removeAccents = void 0;
+exports.formatSlugString = exports.formatSlug = exports.format = exports.removeAccents = void 0;
 var removeAccents = function (str) {
     var accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ';
     var accentsOut = 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn';
@@ -34,3 +34,7 @@ var formatSlug = function (fallback) {
     };
 };
 exports.formatSlug = formatSlug;
+var formatSlugString = function (val) {
+    return (0, exports.format)(val);
+};
+exports.formatSlugString = formatSlugString;
