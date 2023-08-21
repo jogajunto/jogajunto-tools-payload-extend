@@ -1,2 +1,1 @@
-declare const formatSlugString: (val: string) => string;
-export default formatSlugString;
+export declare const formatSlugString: (val: string) => string;
