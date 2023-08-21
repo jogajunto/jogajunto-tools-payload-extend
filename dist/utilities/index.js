@@ -18,3 +18,4 @@ __exportStar(require("./formatMarkdown"), exports);
 __exportStar(require("./formatSlug"), exports);
 __exportStar(require("./prepareImageForRepository"), exports);
 __exportStar(require("./formatSlugString"), exports);
+__exportStar(require("./splitFilename"), exports);
