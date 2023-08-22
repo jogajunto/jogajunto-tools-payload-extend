@@ -19,8 +19,8 @@ const prepareImageForRepository = async (
 ) => {
   try {
     // Adiciona a imagem à payload do cliente
-    data.client_payload.image = image.url;
-    const url = validateAndCorrectURL(image.url);
+    data.client_payload.image = validateAndCorrectURL(image.url);
+    const url = image.url;
     const parts = url.split('/');
     const filename = parts[parts.length - 1];
     const filenameParts = filename.split('.');
