@@ -1,5 +1,17 @@
 import { GitData, ImageType } from '../types';
 
+const validateAndCorrectURL = (url: string): string => {
+  // Usa a função 'encodeURIComponent' para codificar apenas os componentes da URL
+  const urlParts = url.split('/');
+  const lastPart = urlParts.pop() || '';
+  const lastPartEncoded = encodeURIComponent(lastPart);
+
+  // Junta a URL novamente
+  const correctedURL = [...urlParts, lastPartEncoded].join('/');
+
+  return correctedURL;
+};
+
 const prepareImageForRepository = async (
   data: GitData,
   directoryImage: string,
@@ -8,7 +20,7 @@ const prepareImageForRepository = async (
   try {
     // Adiciona a imagem à payload do cliente
     data.client_payload.image = image.url;
-    const url = image.url;
+    const url = validateAndCorrectURL(image.url);
     const parts = url.split('/');
     const filename = parts[parts.length - 1];
     const filenameParts = filename.split('.');
