@@ -1,19 +1,15 @@
 // queueManager.ts
 import _ from 'lodash';
 import { Document } from 'payload/types';
-import { CollectionName, FormatterCollection, GitData } from '../types';
+import {
+  CollectionName,
+  FormatterCollection,
+  GitData,
+  QueueItem,
+} from '../types';
 import formatMarkdown from '../utilities/formatMarkdown';
 import payload from 'payload';
 import sendAction from '../utilities/actions/github/sendAction';
-
-interface QueueItem {
-  collection: string;
-  id: string | number;
-  document: Document;
-  operation: 'delete' | 'create' | 'update';
-  directoryRepository: string;
-  collectionFormatters: Record<CollectionName, FormatterCollection>;
-}
 
 const DELAY_BETWEEN_REQUESTS = 9 * 1000; // 9 segundos
 let queue: QueueItem[] = [];
