@@ -8,3 +8,4 @@ export { ImageType } from './ImageType';
 export { FormatterCollection } from './FormatterCollection';
 export { CollectionName } from './CollectionName';
 export { FormatterRecord } from './FormatterRecord';
+export { QueueItem } from './QueueItem';
