@@ -30,6 +30,7 @@ const formatMarkdown = async (
       case 'upload':
         if (block.value?.id) {
           // Block type Upload
+          console.log('block_error', block);
           const idUpload = block.value.id;
           if (idUpload) {
             const mediaFile = await payload.findByID({
