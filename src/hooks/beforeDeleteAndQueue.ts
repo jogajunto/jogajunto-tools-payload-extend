@@ -3,7 +3,7 @@ import { CollectionBeforeDeleteHook } from 'payload/types';
 import { addToQueue } from '../queue/queueManagerMemory';
 import { CollectionName, FormatterCollection } from '../types';
 
-export const beforeDeleteHook = (
+export const beforeDeleteAndQueue = (
   collectionName: string,
   directoryRepository: string,
   collectionFormatters: Record<CollectionName, FormatterCollection>
