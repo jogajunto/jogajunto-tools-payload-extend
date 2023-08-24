@@ -12,6 +12,8 @@ const beforeDeleteAndQueue = (collectionName, directoryRepository, collectionFor
             collection: collectionName,
             id: id,
         });
+        console.log('id', id);
+        console.log('document', document);
         (0, queueManagerMemory_1.addToQueue)(collectionName, id, document, 'delete', directoryRepository, collectionFormatters);
     };
 };
