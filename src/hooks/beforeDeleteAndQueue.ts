@@ -13,6 +13,8 @@ export const beforeDeleteAndQueue = (
       collection: collectionName,
       id: id,
     });
+    console.log('id', id);
+    console.log('document', document);
     addToQueue(
       collectionName,
       id,
