@@ -20,17 +20,19 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                 content += `## ${block.children[0].text}\n\n`;
                 break;
             case 'upload':
-                // Block type Upload
-                const idUpload = block.value.id;
-                if (idUpload) {
-                    const mediaFile = await payload.findByID({
-                        collection: 'media',
-                        id: idUpload,
-                    });
-                    if (mediaFile) {
-                        const filename = mediaFile.filename;
-                        const urlFile = mediaFile.url;
-                        content += `![${filename}](${urlFile})\n`;
+                if (block.value?.id) {
+                    // Block type Upload
+                    const idUpload = block.value.id;
+                    if (idUpload) {
+                        const mediaFile = await payload.findByID({
+                            collection: 'media',
+                            id: idUpload,
+                        });
+                        if (mediaFile) {
+                            const filename = mediaFile.filename;
+                            const urlFile = mediaFile.url;
+                            content += `![${filename}](${urlFile})\n`;
+                        }
                     }
                 }
                 break;
