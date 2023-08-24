@@ -28,18 +28,20 @@ const formatMarkdown = async (
         break;
 
       case 'upload':
-        // Block type Upload
-        const idUpload = block.value.id;
-        if (idUpload) {
-          const mediaFile = await payload.findByID({
-            collection: 'media',
-            id: idUpload,
-          });
-          if (mediaFile) {
-            const filename = mediaFile.filename;
-            const urlFile = mediaFile.url;
+        if (block.value?.id) {
+          // Block type Upload
+          const idUpload = block.value.id;
+          if (idUpload) {
+            const mediaFile = await payload.findByID({
+              collection: 'media',
+              id: idUpload,
+            });
+            if (mediaFile) {
+              const filename = mediaFile.filename;
+              const urlFile = mediaFile.url;
 
-            content += `![${filename}](${urlFile})\n`;
+              content += `![${filename}](${urlFile})\n`;
+            }
           }
         }
         break;
