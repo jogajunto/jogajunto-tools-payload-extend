@@ -57,7 +57,6 @@ export const getQueue = (): QueueItem[] => {
 };
 
 export const sendOperationFromGithub = async (task: QueueItem) => {
-  console.log('Task antes de formatMarkdown:', task);
   // Formata o documento para markdown
   const markdownFile =
     task.operation !== 'delete'
@@ -68,7 +67,6 @@ export const sendOperationFromGithub = async (task: QueueItem) => {
           task.collectionFormatters
         )
       : '';
-  console.log('Markdown resultante:', markdownFile);
   const data: GitData = {
     event_type: task.operation,
     client_payload: {
