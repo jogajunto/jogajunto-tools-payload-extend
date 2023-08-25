@@ -43,7 +43,9 @@ exports.getQueue = getQueue;
 const sendOperationFromGithub = async (task) => {
     console.log('Task antes de formatMarkdown:', task);
     // Formata o documento para markdown
-    const markdownFile = await (0, formatMarkdown_1.default)(task.document, task.collection, payload_1.default, task.collectionFormatters);
+    const markdownFile = task.operation !== 'delete'
+        ? await (0, formatMarkdown_1.default)(task.document, task.collection, payload_1.default, task.collectionFormatters)
+        : '';
     console.log('Markdown resultante:', markdownFile);
     const data = {
         event_type: task.operation,
@@ -51,9 +53,10 @@ const sendOperationFromGithub = async (task) => {
             slug: task.document.slug,
             operation: task.operation,
             directory: task.directoryRepository,
-            content: lodash_1.default.trim(markdownFile, '\n'),
+            content: markdownFile != '' ? lodash_1.default.trim(markdownFile, '\n') : '',
         },
     };
+    console.log('sendAction(data)', data);
     await (0, sendAction_1.default)(data);
 };
 exports.sendOperationFromGithub = sendOperationFromGithub;
