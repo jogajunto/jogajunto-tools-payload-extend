@@ -8,6 +8,11 @@ const slug: Field = {
   name: 'slug',
   label: 'Slug',
   type: 'text',
+  access: {
+    update: ({ req: { user } }) => {
+      return false;
+    },
+  },
   admin: {
     position: 'sidebar',
     description: 'Slug gerado de forma automática ao salvar o post',
