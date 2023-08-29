@@ -19,3 +19,4 @@ __exportStar(require("./formatSlug"), exports);
 __exportStar(require("./prepareImageForRepository"), exports);
 __exportStar(require("./formatSlugString"), exports);
 __exportStar(require("./splitFilename"), exports);
+__exportStar(require("./formatRichText"), exports);
