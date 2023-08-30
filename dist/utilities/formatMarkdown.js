@@ -75,6 +75,9 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                         content += '\n';
                     });
                     break;
+                case 'blockquote':
+                    content += `> ${block.children[0].text}\n\n`;
+                    break;
                 default:
                     if (block.children.text != '') {
                         // Block type any
