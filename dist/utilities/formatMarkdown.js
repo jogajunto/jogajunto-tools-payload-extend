@@ -5,6 +5,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const lodash_1 = __importDefault(require("lodash"));
+const formatMarkdownText = (child) => {
+    let text = child.text;
+    if (child.bold) {
+        text = `**${text}**`;
+    }
+    if (child.italic) {
+        text = `_${text}_`;
+    }
+    if (child.strikethrough) {
+        text = `~~${text}~~`;
+    }
+    if (child.code) {
+        text = '```' + text + '```';
+    }
+    // Note: Underline não é padrão em Markdown, mas pode ser usado <u> tag HTML.
+    if (child.underline) {
+        text = `<u>${text}</u>`;
+    }
+    return text;
+};
+const handleLink = (child) => {
+    let text = '';
+    child.children.forEach((linkChild) => {
+        let linkText = formatMarkdownText(linkChild);
+        text = `[${linkText}](${child.url})`;
+    });
+    return text;
+};
 const formatMarkdown = async (doc, collectionName, payload, formatters) => {
     const dataFormatter = formatters[collectionName];
     if (!dataFormatter) {
@@ -99,46 +127,15 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                     });
                     break;
                 case 'ol':
-                    // Block type UL
                     block.children.forEach((listItem, index) => {
                         content += `${index + 1}. `;
                         listItem.children.forEach((child) => {
-                            let text = child.text;
                             if (child.type === 'link') {
-                                child.children.forEach((linkChild) => {
-                                    let linkChildText = linkChild.text;
-                                    if (linkChild.bold) {
-                                        text = `[**${linkChildText}**](${child.url})`;
-                                    }
-                                    else if (linkChild.italic) {
-                                        text = `[_${linkChildText}_](${child.url})`;
-                                    }
-                                    else if (linkChild.strikethrough) {
-                                        text = `[~~${linkChildText}~~](${child.url})`;
-                                    }
-                                    else if (linkChild.underline) {
-                                        text = `[<u>${linkChildText}</u>](${child.url})`;
-                                    }
-                                    else {
-                                        text = `[${linkChildText}](${child.url})`;
-                                    }
-                                });
+                                content += handleLink(child);
                             }
                             else {
-                                if (child.bold) {
-                                    text = `**${text}**`;
-                                }
-                                if (child.italic) {
-                                    text = `_${text}_`;
-                                }
-                                if (child.code) {
-                                    text = '```' + text + '```';
-                                }
-                                if (child.strikethrough) {
-                                    text = `~~${text}~~`;
-                                }
+                                content += formatMarkdownText(child);
                             }
-                            content += lodash_1.default.trim(text, '\n');
                         });
                         content += '\n';
                     });
