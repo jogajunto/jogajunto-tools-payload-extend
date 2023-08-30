@@ -59,16 +59,84 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                         content += '- ';
                         listItem.children.forEach((child) => {
                             let text = child.text;
-                            if (child.bold) {
-                                text = `**${text}**`;
-                            }
-                            if (child.italic) {
-                                text = `_${text}_`;
-                            }
                             if (child.type === 'link') {
                                 child.children.forEach((linkChild) => {
-                                    text = `[${linkChild.text}](${child.url})`;
+                                    let linkChildText = linkChild.text;
+                                    if (linkChild.bold) {
+                                        text = `[**${linkChildText}**](${child.url})`;
+                                    }
+                                    else if (linkChild.italic) {
+                                        text = `[_${linkChildText}_](${child.url})`;
+                                    }
+                                    else if (linkChild.strikethrough) {
+                                        text = `[~~${linkChildText}~~](${child.url})`;
+                                    }
+                                    else if (linkChild.underline) {
+                                        text = `[<u>${linkChildText}</u>](${child.url})`;
+                                    }
+                                    else {
+                                        text = `[${linkChildText}](${child.url})`;
+                                    }
                                 });
+                            }
+                            else {
+                                if (child.bold) {
+                                    text = `**${text}**`;
+                                }
+                                if (child.italic) {
+                                    text = `_${text}_`;
+                                }
+                                if (child.code) {
+                                    text = '```' + text + '```';
+                                }
+                                if (child.strikethrough) {
+                                    text = `~~${text}~~`;
+                                }
+                            }
+                            content += lodash_1.default.trim(text, '\n');
+                        });
+                        content += '\n';
+                    });
+                    break;
+                case 'ol':
+                    // Block type UL
+                    block.children.forEach((listItem, index) => {
+                        content += `${index + 1}. `;
+                        listItem.children.forEach((child) => {
+                            let text = child.text;
+                            if (child.type === 'link') {
+                                child.children.forEach((linkChild) => {
+                                    let linkChildText = linkChild.text;
+                                    if (linkChild.bold) {
+                                        text = `[**${linkChildText}**](${child.url})`;
+                                    }
+                                    else if (linkChild.italic) {
+                                        text = `[_${linkChildText}_](${child.url})`;
+                                    }
+                                    else if (linkChild.strikethrough) {
+                                        text = `[~~${linkChildText}~~](${child.url})`;
+                                    }
+                                    else if (linkChild.underline) {
+                                        text = `[<u>${linkChildText}</u>](${child.url})`;
+                                    }
+                                    else {
+                                        text = `[${linkChildText}](${child.url})`;
+                                    }
+                                });
+                            }
+                            else {
+                                if (child.bold) {
+                                    text = `**${text}**`;
+                                }
+                                if (child.italic) {
+                                    text = `_${text}_`;
+                                }
+                                if (child.code) {
+                                    text = '```' + text + '```';
+                                }
+                                if (child.strikethrough) {
+                                    text = `~~${text}~~`;
+                                }
                             }
                             content += lodash_1.default.trim(text, '\n');
                         });
@@ -83,14 +151,42 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                         // Block type any
                         block.children.forEach((child) => {
                             let text = child.text;
-                            if (child.bold) {
-                                text = `**${text}**`;
-                            }
                             if (child.type === 'link') {
-                                text = `[${text}](${child.url})`;
+                                child.children.forEach((linkChild) => {
+                                    let linkChildText = linkChild.text;
+                                    if (linkChild.bold) {
+                                        text = `[**${linkChildText}**](${child.url})`;
+                                    }
+                                    else if (linkChild.italic) {
+                                        text = `[_${linkChildText}_](${child.url})`;
+                                    }
+                                    else if (linkChild.strikethrough) {
+                                        text = `[~~${linkChildText}~~](${child.url})`;
+                                    }
+                                    else if (linkChild.underline) {
+                                        text = `[<u>${linkChildText}</u>](${child.url})`;
+                                    }
+                                    else {
+                                        text = `[${linkChildText}](${child.url})`;
+                                    }
+                                });
                             }
-                            if (child.italic) {
-                                text = `_${text}_`;
+                            else {
+                                if (child.bold) {
+                                    text = `**${text}**`;
+                                }
+                                if (child.italic) {
+                                    text = `_${text}_`;
+                                }
+                                if (child.code) {
+                                    text = '```' + text + '```';
+                                }
+                                if (child.strikethrough) {
+                                    text = `~~${text}~~`;
+                                }
+                                if (child.underline) {
+                                    text = `<u>${text}</u>`;
+                                }
                             }
                             content += lodash_1.default.trim(text, '\n');
                         });
