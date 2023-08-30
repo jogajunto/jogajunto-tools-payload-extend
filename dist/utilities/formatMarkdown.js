@@ -17,8 +17,23 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
         for (const block of doc.content) {
             console.log(block.type);
             switch (block.type) {
+                case 'h1': // Block type H2
+                    content += `# ${block.children[0].text}\n\n`;
+                    break;
                 case 'h2': // Block type H2
                     content += `## ${block.children[0].text}\n\n`;
+                    break;
+                case 'h3': // Block type H2
+                    content += `### ${block.children[0].text}\n\n`;
+                    break;
+                case 'h4': // Block type H2
+                    content += `#### ${block.children[0].text}\n\n`;
+                    break;
+                case 'h5': // Block type H2
+                    content += `##### ${block.children[0].text}\n\n`;
+                    break;
+                case 'h6': // Block type H2
+                    content += `###### ${block.children[0].text}\n\n`;
                     break;
                 case 'upload':
                     if (block.value?.id) {
