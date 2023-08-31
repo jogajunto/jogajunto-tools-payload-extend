@@ -16,7 +16,7 @@
 <li><a href="types.html">types</a></li></ul>
 <h1>Module types</h1></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/jogajunto/jogajunto-tools-payload-extend/blob/98e177f/src/types/index.ts#L1">src/types/index.ts:1</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/jogajunto/jogajunto-tools-payload-extend/blob/f526dc8/src/types/index.ts#L1">src/types/index.ts:1</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -34,6 +34,7 @@
 <a href="types.html#FormatterRecord" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Formatter<wbr/>Record</span></a>
 <a href="types.html#GitData" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Git<wbr/>Data</span></a>
 <a href="types.html#ImageType" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Image<wbr/>Type</span></a>
+<a href="types.html#QueueItem" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Queue<wbr/>Item</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>References</h2>
@@ -56,7 +57,9 @@
 <section class="tsd-panel tsd-member"><a id="GitData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>Git<wbr/>Data</span><a href="#GitData" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>Re-exports <a href="../interfaces/types_GitData.GitData.html">GitData</a></section>
 <section class="tsd-panel tsd-member"><a id="ImageType" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>Image<wbr/>Type</span><a href="#ImageType" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>Re-exports <a href="../interfaces/types_ImageType.ImageType.html">ImageType</a></section></section></div>
+<h3 class="tsd-anchor-link"><span>Image<wbr/>Type</span><a href="#ImageType" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>Re-exports <a href="../interfaces/types_ImageType.ImageType.html">ImageType</a></section>
+<section class="tsd-panel tsd-member"><a id="QueueItem" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>Queue<wbr/>Item</span><a href="#QueueItem" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>Re-exports <a href="../interfaces/types_QueueItem.QueueItem.html">QueueItem</a></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -82,7 +85,8 @@
 <li><a href="#FormatterCollection" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Formatter<wbr/>Collection</span></a></li>
 <li><a href="#FormatterRecord" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Formatter<wbr/>Record</span></a></li>
 <li><a href="#GitData" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Git<wbr/>Data</span></a></li>
-<li><a href="#ImageType" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Image<wbr/>Type</span></a></li></ul></div></details></div>
+<li><a href="#ImageType" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Image<wbr/>Type</span></a></li>
+<li><a href="#QueueItem" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Queue<wbr/>Item</span></a></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../index.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>jogajunto-<wbr/>tools-<wbr/>payload-<wbr/>extend</span></a>
 <ul class="tsd-small-nested-navigation">
@@ -93,10 +97,12 @@
 <li><a href="fields.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>fields</span></a></li>
 <li><a href="fields_slug.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>fields/slug</span></a></li>
 <li><a href="hooks.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>hooks</span></a></li>
+<li><a href="hooks_beforeDeleteAndQueue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>hooks/before<wbr/>Delete<wbr/>And<wbr/>Queue</span></a></li>
 <li><a href="hooks_globalAfterChange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>hooks/global<wbr/>After<wbr/>Change</span></a></li>
 <li><a href="hooks_globalAfterDelete.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>hooks/global<wbr/>After<wbr/>Delete</span></a></li>
 <li><a href="hooks_mediaAfterChange.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>hooks/media<wbr/>After<wbr/>Change</span></a></li>
 <li><a href="index.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>index</span></a></li>
+<li><a href="queue_queueManagerMemory.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>queue/queue<wbr/>Manager<wbr/>Memory</span></a></li>
 <li>
 <details class="tsd-index-accordion" open data-key="types"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg><a href="types.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>types</span></a></summary>
 <div class="tsd-accordion-details">
@@ -110,7 +116,8 @@
 <li><a href="types.html#FormatterCollection"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Formatter<wbr/>Collection</span></a></li>
 <li><a href="types.html#FormatterRecord"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Formatter<wbr/>Record</span></a></li>
 <li><a href="types.html#GitData"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Git<wbr/>Data</span></a></li>
-<li><a href="types.html#ImageType"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Image<wbr/>Type</span></a></li></ul></div></details></li>
+<li><a href="types.html#ImageType"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Image<wbr/>Type</span></a></li>
+<li><a href="types.html#QueueItem"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8388608"></use></svg><span>Queue<wbr/>Item</span></a></li></ul></div></details></li>
 <li><a href="types_ClientPayload.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>types/<wbr/>Client<wbr/>Payload</span></a></li>
 <li><a href="types_CollectionName.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>types/<wbr/>Collection<wbr/>Name</span></a></li>
 <li><a href="types_DiscordDataError.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>types/<wbr/>Discord<wbr/>Data<wbr/>Error</span></a></li>
@@ -121,6 +128,7 @@
 <li><a href="types_FormatterRecord.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>types/<wbr/>Formatter<wbr/>Record</span></a></li>
 <li><a href="types_GitData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>types/<wbr/>Git<wbr/>Data</span></a></li>
 <li><a href="types_ImageType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>types/<wbr/>Image<wbr/>Type</span></a></li>
+<li><a href="types_QueueItem.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>types/<wbr/>Queue<wbr/>Item</span></a></li>
 <li><a href="types_UserType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>types/<wbr/>User<wbr/>Type</span></a></li>
 <li><a href="utilities.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>utilities</span></a></li>
 <li><a href="utilities_actions_discord.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>utilities/actions/discord</span></a></li>
