@@ -110,44 +110,15 @@ const formatMarkdown = async (
           // Block type UL
           block.children.forEach((listItem: any) => {
             content += '- ';
-            listItem.children.forEach((child: any) => {
-              let text = child.text;
 
+            listItem.children[0].children.forEach((child: any) => {
               if (child.type === 'link') {
-                child.children.forEach((linkChild: any) => {
-                  let linkChildText = linkChild.text;
-                  if (linkChild.bold) {
-                    text = `[**${linkChildText}**](${child.url})`;
-                  } else if (linkChild.italic) {
-                    text = `[_${linkChildText}_](${child.url})`;
-                  } else if (linkChild.strikethrough) {
-                    text = `[~~${linkChildText}~~](${child.url})`;
-                  } else if (linkChild.underline) {
-                    text = `[<u>${linkChildText}</u>](${child.url})`;
-                  } else {
-                    text = `[${linkChildText}](${child.url})`;
-                  }
-                });
+                content += handleLink(child);
               } else {
-                if (child.bold) {
-                  text = `**${text}**`;
-                }
-
-                if (child.italic) {
-                  text = `_${text}_`;
-                }
-
-                if (child.code) {
-                  text = '```' + text + '```';
-                }
-
-                if (child.strikethrough) {
-                  text = `~~${text}~~`;
-                }
+                content += formatMarkdownText(child);
               }
-
-              content += _.trim(text, '\n');
             });
+
             content += '\n';
           });
           break;
@@ -156,7 +127,6 @@ const formatMarkdown = async (
           block.children.forEach((listItem: any, index: number) => {
             content += `${index + 1}. `;
 
-            // Considerando a estrutura adicional
             listItem.children[0].children.forEach((child: any) => {
               if (child.type === 'link') {
                 content += handleLink(child);
