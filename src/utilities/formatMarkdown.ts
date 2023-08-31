@@ -37,7 +37,7 @@ const handleLink = (child: any): string => {
 
   child.children.forEach((linkChild: any) => {
     let linkText = formatMarkdownText(linkChild);
-    text = `[${linkText}](${child.url})`;
+    text += `[${linkText}](${child.url})`;
   });
 
   return text;
@@ -156,7 +156,8 @@ const formatMarkdown = async (
           block.children.forEach((listItem: any, index: number) => {
             content += `${index + 1}. `;
 
-            listItem.children.forEach((child: any) => {
+            // Considerando a estrutura adicional
+            listItem.children[0].children.forEach((child: any) => {
               if (child.type === 'link') {
                 content += handleLink(child);
               } else {
