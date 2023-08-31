@@ -85,43 +85,13 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                     // Block type UL
                     block.children.forEach((listItem) => {
                         content += '- ';
-                        listItem.children.forEach((child) => {
-                            let text = child.text;
+                        listItem.children[0].children.forEach((child) => {
                             if (child.type === 'link') {
-                                child.children.forEach((linkChild) => {
-                                    let linkChildText = linkChild.text;
-                                    if (linkChild.bold) {
-                                        text = `[**${linkChildText}**](${child.url})`;
-                                    }
-                                    else if (linkChild.italic) {
-                                        text = `[_${linkChildText}_](${child.url})`;
-                                    }
-                                    else if (linkChild.strikethrough) {
-                                        text = `[~~${linkChildText}~~](${child.url})`;
-                                    }
-                                    else if (linkChild.underline) {
-                                        text = `[<u>${linkChildText}</u>](${child.url})`;
-                                    }
-                                    else {
-                                        text = `[${linkChildText}](${child.url})`;
-                                    }
-                                });
+                                content += handleLink(child);
                             }
                             else {
-                                if (child.bold) {
-                                    text = `**${text}**`;
-                                }
-                                if (child.italic) {
-                                    text = `_${text}_`;
-                                }
-                                if (child.code) {
-                                    text = '```' + text + '```';
-                                }
-                                if (child.strikethrough) {
-                                    text = `~~${text}~~`;
-                                }
+                                content += formatMarkdownText(child);
                             }
-                            content += lodash_1.default.trim(text, '\n');
                         });
                         content += '\n';
                     });
@@ -129,7 +99,6 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                 case 'ol':
                     block.children.forEach((listItem, index) => {
                         content += `${index + 1}. `;
-                        // Considerando a estrutura adicional
                         listItem.children[0].children.forEach((child) => {
                             if (child.type === 'link') {
                                 content += handleLink(child);
