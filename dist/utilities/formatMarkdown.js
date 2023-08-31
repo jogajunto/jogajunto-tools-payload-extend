@@ -29,7 +29,7 @@ const handleLink = (child) => {
     let text = '';
     child.children.forEach((linkChild) => {
         let linkText = formatMarkdownText(linkChild);
-        text = `[${linkText}](${child.url})`;
+        text += `[${linkText}](${child.url})`;
     });
     return text;
 };
@@ -129,7 +129,8 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                 case 'ol':
                     block.children.forEach((listItem, index) => {
                         content += `${index + 1}. `;
-                        listItem.children.forEach((child) => {
+                        // Considerando a estrutura adicional
+                        listItem.children[0].children.forEach((child) => {
                             if (child.type === 'link') {
                                 content += handleLink(child);
                             }
