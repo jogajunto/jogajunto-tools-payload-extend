@@ -13,6 +13,11 @@ const sendAction = async (dataToSend: GitData) => {
       );
     }
 
+    if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+      console.log('dataToSend: ', dataToSend);
+      return;
+    }
+
     const headers = {
       Accept: 'application/vnd.github.everest-preview+json',
       Authorization: `token ${githubToken}`,
@@ -21,11 +26,6 @@ const sendAction = async (dataToSend: GitData) => {
     const response = await axios.post(repositoryDispatchURL, dataToSend, {
       headers,
     });
-
-    if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
-      console.log('dataToSend: ', dataToSend);
-      return;
-    }
 
     if (
       (response.status === 200 && response?.config?.data) ||
