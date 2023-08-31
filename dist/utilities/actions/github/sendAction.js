@@ -12,6 +12,10 @@ const sendAction = async (dataToSend) => {
         if (!githubToken || !repositoryDispatchURL) {
             throw new Error('Missing GITHUB_TOKEN or REPOSITORY_DISPATCH_URL in environment variables.');
         }
+        if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+            console.log('dataToSend: ', dataToSend);
+            return;
+        }
         const headers = {
             Accept: 'application/vnd.github.everest-preview+json',
             Authorization: `token ${githubToken}`,
@@ -19,10 +23,6 @@ const sendAction = async (dataToSend) => {
         const response = await axios_1.default.post(repositoryDispatchURL, dataToSend, {
             headers,
         });
-        if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
-            console.log('dataToSend: ', dataToSend);
-            return;
-        }
         if ((response.status === 200 && response?.config?.data) ||
             (response.status === 204 && response?.config?.data)) {
             const responseData = JSON.parse(response.config.data);
