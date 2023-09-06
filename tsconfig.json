@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "target": "ES2020",
     "module": "commonjs",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -12,7 +13,7 @@
     "forceConsistentCasingInFileNames": true
     // outras configurações aqui
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"],
   "ts-node": {
     "transpileOnly": true
