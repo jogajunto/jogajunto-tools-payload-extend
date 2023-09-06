@@ -33,9 +33,34 @@ const sendAction = async (dataToSend: GitData) => {
       (response.status === 204 && response?.config?.data)
     ) {
       const responseData = JSON.parse(response.config.data);
-      let info = `Tipo de evento: \`${responseData.event_type}\` | Slug: \`${responseData.client_payload.slug}\` | Diretório: \`${responseData.client_payload.directory}\``;
 
-      const discordInfo: DiscordDataInfo = { message: info };
+      const discordInfo: DiscordDataInfo = {
+        message: '\n',
+        embed: {
+          title: 'Notificação do CMS',
+          description: 'Segue as informações da notificação',
+          color: 'Green',
+          author: {
+            name: process.env.DISCORD_CHAT_APP_NAME,
+            icon_url:
+              'https://cdn-1.webcatalog.io/catalog/payload-cms/payload-cms-icon-filled-256.webp?v=1675593518505',
+          },
+          fields: [
+            {
+              name: 'Tipo de evento:',
+              value: responseData.event_type,
+            },
+            {
+              name: 'Slug:',
+              value: responseData.client_payload.slug,
+            },
+            {
+              name: 'Diretório:',
+              value: responseData.client_payload.directory,
+            },
+          ],
+        },
+      };
       sendInfoDisc(discordInfo);
     }
   } catch (error: unknown) {
