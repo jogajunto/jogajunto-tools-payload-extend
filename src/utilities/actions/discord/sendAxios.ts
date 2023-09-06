@@ -17,6 +17,9 @@ const sendAxios = (
   let content = getBeforeMessage
     ? `${getBeforeMessage} ${message}`
     : `${message}`;
+
+  if (embed) console.log('embed:', embed);
+
   axios
     .post(webhookURL, {
       content: content,
