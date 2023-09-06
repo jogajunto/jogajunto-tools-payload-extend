@@ -16,10 +16,12 @@ const sendAxios = async (message, beforeMessage, embed) => {
         : `${message}`;
     if (embed)
         console.log('embed:', embed);
+    if (!embed)
+        embed = undefined;
     let response = await axios_1.default
         .post(webhookURL, {
         content: content,
-        embed: embed ?? null,
+        embed: embed,
     })
         .catch((err) => {
         console.error('Erro ao enviar a notificação para o Discord:', err);
