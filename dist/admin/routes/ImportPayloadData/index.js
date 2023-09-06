@@ -74,11 +74,13 @@ const ImportPayloadData = (req, res) => {
                         data: item,
                     });
                 }
-                res.status(200).send({ message: 'Dados importados com sucesso.' });
+                return res
+                    .status(200)
+                    .send({ message: 'Dados importados com sucesso.' });
             }
             catch (error) {
                 console.error('Erro ao processar e importar dados para o Payload CMS:', error);
-                res.status(500).send({ message: 'Erro interno do servidor.' });
+                return res.status(500).send({ message: 'Erro interno do servidor.' });
             }
         });
     }
