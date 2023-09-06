@@ -28,12 +28,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const react_router_dom_1 = require("react-router-dom");
+const styled_components_1 = __importDefault(require("styled-components"));
 const Minimal_1 = __importDefault(require("payload/dist/admin/components/templates/Minimal"));
 const Button_1 = __importDefault(require("payload/dist/admin/components/elements/Button"));
 const hooks_1 = require("payload/components/hooks");
 const Config_1 = require("payload/dist/admin/components/utilities/Config");
 const Meta_1 = __importDefault(require("payload/dist/admin/components/utilities/Meta"));
-require("./ImportView.scss"); // Importação do arquivo SCSS
 const ImportView = ({ user, canAccessAdmin }) => {
     const { routes: { admin: adminRoute }, } = (0, Config_1.useConfig)();
     const { setStepNav } = (0, hooks_1.useStepNav)();
@@ -101,7 +101,49 @@ const ImportView = ({ user, canAccessAdmin }) => {
         };
         reader.readAsText(file);
     };
-    return (react_1.default.createElement(Minimal_1.default, { className: 'import-view' },
+    const ImportViewContainer = (0, styled_components_1.default)(Minimal_1.default) `
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .upload-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 20px;
+
+      label {
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type='file'] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+
+    .button-section {
+      display: flex;
+      gap: 10px;
+    }
+  `;
+    const FeedbackMessage = styled_components_1.default.p `
+    margin: 20px 0;
+    color: #fff;
+    padding: 20px;
+
+    &.success {
+      background-color: green; // ou a cor que preferir para mensagens de sucesso
+    }
+
+    &.error {
+      background-color: red;
+    }
+  `;
+    return (react_1.default.createElement(ImportViewContainer, null,
         react_1.default.createElement(Meta_1.default, { title: 'Import JSON', description: 'Import your JSON data into Payload.', keywords: 'Import, JSON, Payload, CMS' }),
         react_1.default.createElement("h1", null, "Import JSON Route"),
         react_1.default.createElement("div", { className: 'upload-section' },
@@ -110,6 +152,6 @@ const ImportView = ({ user, canAccessAdmin }) => {
         react_1.default.createElement("div", { className: 'button-section' },
             react_1.default.createElement(Button_1.default, { el: 'button', onClick: handleImport, buttonStyle: 'secondary' }, "Import"),
             react_1.default.createElement(Button_1.default, { el: 'link', to: `${adminRoute}`, buttonStyle: 'secondary' }, "Cancel")),
-        feedback && (react_1.default.createElement("p", { className: `feedback-message ${feedback.type}` }, feedback.message))));
+        feedback && (react_1.default.createElement(FeedbackMessage, { className: feedback.type }, feedback.message))));
 };
 exports.default = ImportView;
