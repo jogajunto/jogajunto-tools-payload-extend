@@ -10,11 +10,11 @@ const sendErrorDisc = async (data) => {
     const errorMessage = data.error instanceof Error
         ? `:rotating_light: :interrobang: ${data.error.message}`
         : ':rotating_light: :interrobang: Erro desconhecido';
-    (0, sendAxios_1.default)(errorMessage, beforeMessageEnv);
+    (0, sendAxios_1.default)(errorMessage, beforeMessageEnv, data.embed);
 };
 exports.sendErrorDisc = sendErrorDisc;
 const sendInfoDisc = async (data) => {
     const infoMessage = `:white_check_mark: ${data.message}`;
-    (0, sendAxios_1.default)(infoMessage, beforeMessageEnv);
+    (0, sendAxios_1.default)(infoMessage, beforeMessageEnv, data.embed);
 };
 exports.sendInfoDisc = sendInfoDisc;
