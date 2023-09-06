@@ -13,6 +13,7 @@ const sendAction = async (dataToSend: GitData) => {
       );
     }
 
+    // In production not send to github and discord
     if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
       console.log('dataToSend: ', dataToSend);
       return;
