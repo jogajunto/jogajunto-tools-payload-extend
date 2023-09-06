@@ -1,0 +1,44 @@
+.import-view {
+  h1 {
+    margin-bottom: 30px;
+  }
+
+  .upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+
+    label {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+
+  .button-section {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.feedback-message {
+  margin: 20px 0;
+  color: #fff;
+  padding: 20px;
+
+  &.success {
+    background-color: green; // ou a cor que preferir para mensagens de sucesso
+  }
+
+  // Para mensagens de erro:
+  &.error {
+    background-color: red;
+  }
+}
