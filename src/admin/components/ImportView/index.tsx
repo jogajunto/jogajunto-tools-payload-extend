@@ -81,10 +81,16 @@ const ImportView: AdminView = ({ user, canAccessAdmin }) => {
               responseData.message || 'Ocorreu um erro ao importar seus dados.',
           });
         }
-      } catch (error) {
+      } catch (error: unknown) {
+        let errorMessage = 'An unknown error occurred.';
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        }
         setFeedback({
           type: 'error',
-          message: `Erro ao processar o arquivo JSON: ${error.message}`,
+          message: `Erro ao processar o arquivo JSON: ${new Error(
+            errorMessage
+          )}`,
         });
       }
     };
