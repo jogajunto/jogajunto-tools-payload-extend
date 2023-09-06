@@ -3,7 +3,7 @@ import { EmbedData } from '../../../types';
 
 const webhookURL = process.env.DISCORD_CODENZBOT_WEBHOOK;
 
-const sendAxios = (
+const sendAxios = async (
   message: string,
   beforeMessage?: string,
   embed?: EmbedData
@@ -20,7 +20,7 @@ const sendAxios = (
 
   if (embed) console.log('embed:', embed);
 
-  let response = axios
+  let response = await axios
     .post(webhookURL, {
       content: content,
       embed: embed ?? null,
