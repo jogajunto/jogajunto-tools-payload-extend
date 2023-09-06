@@ -19,7 +19,7 @@ const sendAxios = (message, beforeMessage, embed) => {
     axios_1.default
         .post(webhookURL, {
         content: content,
-        embed: embed || null,
+        embed: embed ?? null,
     })
         .catch((err) => {
         console.error('Erro ao enviar a notificação para o Discord:', err);
