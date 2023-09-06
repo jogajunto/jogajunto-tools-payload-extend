@@ -27,8 +27,32 @@ const sendAction = async (dataToSend) => {
         if ((response.status === 200 && response?.config?.data) ||
             (response.status === 204 && response?.config?.data)) {
             const responseData = JSON.parse(response.config.data);
-            let info = `Tipo de evento: \`${responseData.event_type}\` | Slug: \`${responseData.client_payload.slug}\` | Diretório: \`${responseData.client_payload.directory}\``;
-            const discordInfo = { message: info };
+            const discordInfo = {
+                message: '\n',
+                embed: {
+                    title: 'Notificação do CMS',
+                    description: 'Segue as informações da notificação',
+                    color: 'Green',
+                    author: {
+                        name: process.env.DISCORD_CHAT_APP_NAME,
+                        icon_url: 'https://cdn-1.webcatalog.io/catalog/payload-cms/payload-cms-icon-filled-256.webp?v=1675593518505',
+                    },
+                    fields: [
+                        {
+                            name: 'Tipo de evento:',
+                            value: responseData.event_type,
+                        },
+                        {
+                            name: 'Slug:',
+                            value: responseData.client_payload.slug,
+                        },
+                        {
+                            name: 'Diretório:',
+                            value: responseData.client_payload.directory,
+                        },
+                    ],
+                },
+            };
             (0, discord_1.sendInfoDisc)(discordInfo);
         }
     }
