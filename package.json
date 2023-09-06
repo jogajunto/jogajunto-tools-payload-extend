@@ -10,13 +10,15 @@
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
+    "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
+    "marked": "^7.0.5",
     "payload": "^1.11.3",
-    "marked": "^7.0.5"
+    "styled-components": "^6.0.7"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.195",
