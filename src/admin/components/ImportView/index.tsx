@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 
 import MinimalTemplate from 'payload/dist/admin/components/templates/Minimal';
 import Button from 'payload/dist/admin/components/elements/Button';
@@ -7,8 +8,6 @@ import { AdminView } from 'payload/config';
 import { useStepNav } from 'payload/components/hooks';
 import { useConfig } from 'payload/dist/admin/components/utilities/Config';
 import Meta from 'payload/dist/admin/components/utilities/Meta';
-
-import './ImportView.scss'; // Importação do arquivo SCSS
 
 type FeedbackType = 'success' | 'error';
 
@@ -97,8 +96,52 @@ const ImportView: AdminView = ({ user, canAccessAdmin }) => {
     reader.readAsText(file);
   };
 
+  const ImportViewContainer = styled(MinimalTemplate)`
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .upload-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 20px;
+
+      label {
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type='file'] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+
+    .button-section {
+      display: flex;
+      gap: 10px;
+    }
+  `;
+
+  const FeedbackMessage = styled.p`
+    margin: 20px 0;
+    color: #fff;
+    padding: 20px;
+
+    &.success {
+      background-color: green; // ou a cor que preferir para mensagens de sucesso
+    }
+
+    &.error {
+      background-color: red;
+    }
+  `;
+
   return (
-    <MinimalTemplate className='import-view'>
+    <ImportViewContainer>
       <Meta
         title='Import JSON'
         description='Import your JSON data into Payload.'
@@ -118,11 +161,11 @@ const ImportView: AdminView = ({ user, canAccessAdmin }) => {
         </Button>
       </div>
       {feedback && (
-        <p className={`feedback-message ${feedback.type}`}>
+        <FeedbackMessage className={feedback.type}>
           {feedback.message}
-        </p>
+        </FeedbackMessage>
       )}
-    </MinimalTemplate>
+    </ImportViewContainer>
   );
 };
 
