@@ -12,6 +12,7 @@ const sendAction = async (dataToSend) => {
         if (!githubToken || !repositoryDispatchURL) {
             throw new Error('Missing GITHUB_TOKEN or REPOSITORY_DISPATCH_URL in environment variables.');
         }
+        // In production not send to github and discord
         if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
             console.log('dataToSend: ', dataToSend);
             return;
