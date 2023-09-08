@@ -4,6 +4,11 @@
   "description": "Biblioteca para modularizar componentes do Payload CMS.",
   "main": "dist/index.js",
   "license": "MIT",
+  "engines": {
+    "node": "18.8.0",
+    "yarn": "1.22.19",
+    "npm": "8.18.0"
+  },
   "scripts": {
     "build": "tsc",
     "docs": "typedoc --entryPointStrategy expand"
@@ -11,6 +16,7 @@
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
     "@types/styled-components": "^5.1.26",
+    "@types/jsonwebtoken": "^9.0.2",
     "axios": "^1.4.0",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
@@ -18,7 +24,8 @@
     "lodash": "^4.17.21",
     "marked": "^7.0.5",
     "payload": "^1.11.3",
-    "styled-components": "^6.0.7"
+    "styled-components": "^6.0.7",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.195",
