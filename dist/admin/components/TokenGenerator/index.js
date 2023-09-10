@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const forms_1 = require("payload/components/forms");
-require("./index.scss");
 const utilities_1 = require("payload/components/utilities");
 const baseClass = 'tokenGenerator';
 const TokenGenerator = ({ path, label, required }) => {
