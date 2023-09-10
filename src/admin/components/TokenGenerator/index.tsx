@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { TextInput, useField } from 'payload/components/forms';
-import './index.scss';
 import { useAuth } from 'payload/components/utilities';
 
 const baseClass = 'tokenGenerator';
