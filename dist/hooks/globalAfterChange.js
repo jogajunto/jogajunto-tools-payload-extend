@@ -1,11 +1,34 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.globalAfterChange = void 0;
 // Importações necessárias
-const lodash_1 = __importDefault(require("lodash"));
+const lodash_1 = __importStar(require("lodash"));
 const formatMarkdown_1 = __importDefault(require("../utilities/formatMarkdown"));
 const sendAction_1 = __importDefault(require("../utilities/actions/github/sendAction"));
 const prepareImageForRepository_1 = __importDefault(require("../utilities/prepareImageForRepository"));
@@ -29,13 +52,21 @@ directoryImage // Imagem do diretório, se houver
                 let newDoc = lodash_1.default.omit(doc, ['updatedAt']);
                 // Inicia a variavel null para se não existir newDoc.image
                 let image = null;
+                // Inicia o id da image
+                let idImage = '';
                 // Pega a imagem de começo pois vai ser utlizada em varias partes
-                if (newDoc.image &&
+                if (newDoc.image && (0, lodash_1.isString)(newDoc.image)) {
+                    idImage = newDoc.image;
+                }
+                else if (newDoc.image && !(0, lodash_1.isString)(newDoc.image)) {
+                    idImage = newDoc.image.id;
+                }
+                if (idImage != '' &&
                     collectionUploadName != null &&
                     collectionUploadName != undefined) {
                     image = await payload.findByID({
                         collection: collectionUploadName,
-                        id: newDoc.image,
+                        id: idImage,
                     });
                 }
                 // Variável para verificar se a imagem foi atualizada
