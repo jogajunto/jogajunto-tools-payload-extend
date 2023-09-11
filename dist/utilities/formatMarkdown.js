@@ -83,32 +83,36 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                     break;
                 case 'ul':
                     // Block type UL
-                    block.children.forEach((listItem) => {
-                        content += '- ';
-                        listItem.children[0].children.forEach((child) => {
-                            if (child.type === 'link') {
-                                content += handleLink(child);
-                            }
-                            else {
-                                content += formatMarkdownText(child);
-                            }
+                    if (Array.isArray(block.children)) {
+                        block.children.forEach((listItem) => {
+                            content += '- ';
+                            listItem.children[0].children.forEach((child) => {
+                                if (child.type === 'link') {
+                                    content += handleLink(child);
+                                }
+                                else {
+                                    content += formatMarkdownText(child);
+                                }
+                            });
+                            content += '\n';
                         });
-                        content += '\n';
-                    });
+                    }
                     break;
                 case 'ol':
-                    block.children.forEach((listItem, index) => {
-                        content += `${index + 1}. `;
-                        listItem.children[0].children.forEach((child) => {
-                            if (child.type === 'link') {
-                                content += handleLink(child);
-                            }
-                            else {
-                                content += formatMarkdownText(child);
-                            }
+                    if (Array.isArray(block.children)) {
+                        block.children.forEach((listItem, index) => {
+                            content += `${index + 1}. `;
+                            listItem.children[0].children.forEach((child) => {
+                                if (child.type === 'link') {
+                                    content += handleLink(child);
+                                }
+                                else {
+                                    content += formatMarkdownText(child);
+                                }
+                            });
+                            content += '\n';
                         });
-                        content += '\n';
-                    });
+                    }
                     break;
                 case 'blockquote':
                     content += `> ${block.children[0].text}\n\n`;
