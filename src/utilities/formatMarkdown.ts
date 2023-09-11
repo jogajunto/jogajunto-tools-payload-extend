@@ -108,35 +108,39 @@ const formatMarkdown = async (
 
         case 'ul':
           // Block type UL
-          block.children.forEach((listItem: any) => {
-            content += '- ';
+          if (Array.isArray(block.children)) {
+            block.children.forEach((listItem: any) => {
+              content += '- ';
 
-            listItem.children[0].children.forEach((child: any) => {
-              if (child.type === 'link') {
-                content += handleLink(child);
-              } else {
-                content += formatMarkdownText(child);
-              }
+              listItem.children[0].children.forEach((child: any) => {
+                if (child.type === 'link') {
+                  content += handleLink(child);
+                } else {
+                  content += formatMarkdownText(child);
+                }
+              });
+
+              content += '\n';
             });
-
-            content += '\n';
-          });
+          }
           break;
 
         case 'ol':
-          block.children.forEach((listItem: any, index: number) => {
-            content += `${index + 1}. `;
+          if (Array.isArray(block.children)) {
+            block.children.forEach((listItem: any, index: number) => {
+              content += `${index + 1}. `;
 
-            listItem.children[0].children.forEach((child: any) => {
-              if (child.type === 'link') {
-                content += handleLink(child);
-              } else {
-                content += formatMarkdownText(child);
-              }
+              listItem.children[0].children.forEach((child: any) => {
+                if (child.type === 'link') {
+                  content += handleLink(child);
+                } else {
+                  content += formatMarkdownText(child);
+                }
+              });
+
+              content += '\n';
             });
-
-            content += '\n';
-          });
+          }
           break;
 
         case 'blockquote':
