@@ -107,16 +107,13 @@ directoryImage // Imagem do diretório, se houver
             return doc;
         }
         catch (error) {
-            let message;
             if (error instanceof Error) {
                 console.error('Erro durante o processo de alteração global:', error.message);
-                message = error.message;
             }
             else {
                 console.error('Erro durante o processo de alteração global:', error);
-                message = 'Erro durante o processo de alteração global';
             }
-            throw message;
+            throw error;
             // Dependendo do que você deseja fazer quando um erro ocorre, você pode:
             // 1. Rethrow o erro se desejar que ele seja tratado por um manipulador de erros de nível superior
             // throw error;
