@@ -10,7 +10,7 @@
     "npm": "8.18.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "docs": "typedoc --entryPointStrategy expand"
   },
   "dependencies": {
