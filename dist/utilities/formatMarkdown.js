@@ -102,14 +102,18 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                     if (Array.isArray(block.children)) {
                         block.children.forEach((listItem, index) => {
                             content += `${index + 1}. `;
-                            listItem.children[0].children.forEach((child) => {
-                                if (child.type === 'link') {
-                                    content += handleLink(child);
-                                }
-                                else {
-                                    content += formatMarkdownText(child);
-                                }
-                            });
+                            if (listItem.children &&
+                                listItem.children[0] &&
+                                Array.isArray(listItem.children[0].children)) {
+                                listItem.children[0].children.forEach((child) => {
+                                    if (child.type === 'link') {
+                                        content += handleLink(child);
+                                    }
+                                    else {
+                                        content += formatMarkdownText(child);
+                                    }
+                                });
+                            }
                             content += '\n';
                         });
                     }
