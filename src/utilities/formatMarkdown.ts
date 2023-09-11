@@ -35,10 +35,12 @@ const formatMarkdownText = (child: any): string => {
 const handleLink = (child: any): string => {
   let text = '';
 
-  child.children.forEach((linkChild: any) => {
-    let linkText = formatMarkdownText(linkChild);
-    text += `[${linkText}](${child.url})`;
-  });
+  if (Array.isArray(child.children)) {
+    child.children.forEach((linkChild: any) => {
+      let linkText = formatMarkdownText(linkChild);
+      text += `[${linkText}](${child.url})`;
+    });
+  }
 
   return text;
 };
@@ -160,20 +162,22 @@ const formatMarkdown = async (
               let text = child.text;
 
               if (child.type === 'link') {
-                child.children.forEach((linkChild: any) => {
-                  let linkChildText = linkChild.text;
-                  if (linkChild.bold) {
-                    text = `[**${linkChildText}**](${child.url})`;
-                  } else if (linkChild.italic) {
-                    text = `[_${linkChildText}_](${child.url})`;
-                  } else if (linkChild.strikethrough) {
-                    text = `[~~${linkChildText}~~](${child.url})`;
-                  } else if (linkChild.underline) {
-                    text = `[<u>${linkChildText}</u>](${child.url})`;
-                  } else {
-                    text = `[${linkChildText}](${child.url})`;
-                  }
-                });
+                if (Array.isArray(child.children)) {
+                  child.children.forEach((linkChild: any) => {
+                    let linkChildText = linkChild.text;
+                    if (linkChild.bold) {
+                      text = `[**${linkChildText}**](${child.url})`;
+                    } else if (linkChild.italic) {
+                      text = `[_${linkChildText}_](${child.url})`;
+                    } else if (linkChild.strikethrough) {
+                      text = `[~~${linkChildText}~~](${child.url})`;
+                    } else if (linkChild.underline) {
+                      text = `[<u>${linkChildText}</u>](${child.url})`;
+                    } else {
+                      text = `[${linkChildText}](${child.url})`;
+                    }
+                  });
+                }
               } else {
                 if (child.bold) {
                   text = `**${text}**`;
