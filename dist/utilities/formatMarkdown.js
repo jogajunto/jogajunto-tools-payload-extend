@@ -27,10 +27,12 @@ const formatMarkdownText = (child) => {
 };
 const handleLink = (child) => {
     let text = '';
-    child.children.forEach((linkChild) => {
-        let linkText = formatMarkdownText(linkChild);
-        text += `[${linkText}](${child.url})`;
-    });
+    if (Array.isArray(child.children)) {
+        child.children.forEach((linkChild) => {
+            let linkText = formatMarkdownText(linkChild);
+            text += `[${linkText}](${child.url})`;
+        });
+    }
     return text;
 };
 const formatMarkdown = async (doc, collectionName, payload, formatters) => {
@@ -127,24 +129,26 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
                         block.children.forEach((child) => {
                             let text = child.text;
                             if (child.type === 'link') {
-                                child.children.forEach((linkChild) => {
-                                    let linkChildText = linkChild.text;
-                                    if (linkChild.bold) {
-                                        text = `[**${linkChildText}**](${child.url})`;
-                                    }
-                                    else if (linkChild.italic) {
-                                        text = `[_${linkChildText}_](${child.url})`;
-                                    }
-                                    else if (linkChild.strikethrough) {
-                                        text = `[~~${linkChildText}~~](${child.url})`;
-                                    }
-                                    else if (linkChild.underline) {
-                                        text = `[<u>${linkChildText}</u>](${child.url})`;
-                                    }
-                                    else {
-                                        text = `[${linkChildText}](${child.url})`;
-                                    }
-                                });
+                                if (Array.isArray(child.children)) {
+                                    child.children.forEach((linkChild) => {
+                                        let linkChildText = linkChild.text;
+                                        if (linkChild.bold) {
+                                            text = `[**${linkChildText}**](${child.url})`;
+                                        }
+                                        else if (linkChild.italic) {
+                                            text = `[_${linkChildText}_](${child.url})`;
+                                        }
+                                        else if (linkChild.strikethrough) {
+                                            text = `[~~${linkChildText}~~](${child.url})`;
+                                        }
+                                        else if (linkChild.underline) {
+                                            text = `[<u>${linkChildText}</u>](${child.url})`;
+                                        }
+                                        else {
+                                            text = `[${linkChildText}](${child.url})`;
+                                        }
+                                    });
+                                }
                             }
                             else {
                                 if (child.bold) {
