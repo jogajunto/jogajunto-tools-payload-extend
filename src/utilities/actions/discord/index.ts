@@ -1,4 +1,4 @@
-import { DiscordDataError, DiscordDataInfo } from '../../../types';
+import { DiscordDataError, DiscordDataInfo } from '../../../types/discord';
 import sendAxios from './sendAxios';
 
 const beforeMessageEnv = `${process.env.DISCORD_CHAT_APP_NAME} |`;

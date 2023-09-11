@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { DiscordDataError, DiscordDataInfo, GitData } from '../../../types';
+import { DiscordDataError, DiscordDataInfo } from '../../../types/discord';
 import { sendErrorDisc, sendInfoDisc } from '../discord';
+import { GitData } from '../../../types';
 
 const sendAction = async (dataToSend: GitData) => {
   try {
