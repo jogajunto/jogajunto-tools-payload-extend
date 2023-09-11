@@ -22,6 +22,7 @@ export const globalAfterChange = (
     operation, // Nome da operação, ex: 'create', 'update'
   }) => {
     try {
+      let preserveDocForReturn: any = doc;
       // Verifica se a operação é de criação ou atualização
       if (operation === 'update' || operation === 'create') {
         // Remove campos desnecessários dos documentos antigo e novo
@@ -36,9 +37,9 @@ export const globalAfterChange = (
 
         // Pega a imagem de começo pois vai ser utlizada em varias partes
         if (newDoc.image && isString(newDoc.image)) {
-          idImage = newDoc.image;
+          idImage = preserveDocForReturn.image;
         } else if (newDoc.image && !isString(newDoc.image)) {
-          idImage = newDoc.image.id;
+          idImage = preserveDocForReturn.image.id;
         }
         if (
           idImage != '' &&
@@ -97,7 +98,7 @@ export const globalAfterChange = (
       }
 
       // Retorna o documento modificado
-      return doc;
+      return preserveDocForReturn;
     } catch (error) {
       if (error instanceof Error) {
         console.error(
