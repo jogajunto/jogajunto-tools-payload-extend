@@ -130,13 +130,19 @@ const formatMarkdown = async (
             block.children.forEach((listItem: any, index: number) => {
               content += `${index + 1}. `;
 
-              listItem.children[0].children.forEach((child: any) => {
-                if (child.type === 'link') {
-                  content += handleLink(child);
-                } else {
-                  content += formatMarkdownText(child);
-                }
-              });
+              if (
+                listItem.children &&
+                listItem.children[0] &&
+                Array.isArray(listItem.children[0].children)
+              ) {
+                listItem.children[0].children.forEach((child: any) => {
+                  if (child.type === 'link') {
+                    content += handleLink(child);
+                  } else {
+                    content += formatMarkdownText(child);
+                  }
+                });
+              }
 
               content += '\n';
             });
