@@ -1,4 +1,4 @@
-import { EmbedData } from './discord/EmbedData';
+import { EmbedData } from './EmbedData';
 /**
  * Representa um erro para dados destinados ao Discord.
  */

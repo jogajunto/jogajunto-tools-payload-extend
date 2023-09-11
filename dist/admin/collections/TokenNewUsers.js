@@ -42,6 +42,9 @@ const TokenNewUsers = {
         {
             name: 'used',
             type: 'checkbox',
+            admin: {
+                readOnly: true,
+            },
         },
     ],
 };
