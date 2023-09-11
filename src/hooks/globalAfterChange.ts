@@ -1,5 +1,5 @@
 // Importações necessárias
-import _ from 'lodash';
+import _, { isString } from 'lodash';
 import { CollectionAfterChangeHook } from 'payload/types';
 import formatMarkdown from '../utilities/formatMarkdown';
 import { FormatterCollection, GitData, ImageType } from '../types';
@@ -31,15 +31,23 @@ export const globalAfterChange = (
         // Inicia a variavel null para se não existir newDoc.image
         let image = null;
 
+        // Inicia o id da image
+        let idImage = '';
+
         // Pega a imagem de começo pois vai ser utlizada em varias partes
+        if (newDoc.image && isString(newDoc.image)) {
+          idImage = newDoc.image;
+        } else if (newDoc.image && !isString(newDoc.image)) {
+          idImage = newDoc.image.id;
+        }
         if (
-          newDoc.image &&
+          idImage != '' &&
           collectionUploadName != null &&
           collectionUploadName != undefined
         ) {
           image = await payload.findByID({
             collection: collectionUploadName,
-            id: newDoc.image,
+            id: idImage,
           });
         }
 
