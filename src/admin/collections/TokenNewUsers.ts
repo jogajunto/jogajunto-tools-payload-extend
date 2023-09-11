@@ -39,6 +39,9 @@ const TokenNewUsers: CollectionConfig = {
     {
       name: 'used',
       type: 'checkbox',
+      admin: {
+        readOnly: true,
+      },
     },
   ],
 };
