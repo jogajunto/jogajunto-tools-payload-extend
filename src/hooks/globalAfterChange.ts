@@ -29,6 +29,15 @@ export const globalAfterChange = (
         let oldDoc = _.omit(previousDoc, ['_id', '__v', 'updatedAt']);
         let newDoc = _.omit(doc, ['updatedAt']);
 
+        // Transforma a propriedade 'image' do newDoc em uma string
+        if (
+          newDoc.image &&
+          typeof newDoc.image === 'object' &&
+          newDoc.image.id
+        ) {
+          newDoc.image = newDoc.image.id;
+        }
+
         // Verifica se o documento foi alterado
         if (!_.isEqual(newDoc, oldDoc)) {
           console.log('The document was changed.');
