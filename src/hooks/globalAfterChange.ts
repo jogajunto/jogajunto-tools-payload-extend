@@ -29,31 +29,31 @@ export const globalAfterChange = (
         let oldDoc = _.omit(previousDoc, ['_id', '__v', 'updatedAt']);
         let newDoc = _.omit(doc, ['updatedAt']);
 
-        // Inicia a variavel null para se não existir newDoc.image
-        let image = null;
-
-        // Pega a imagem de começo pois vai ser utlizada em varias partes
-        if (
-          newDoc.image &&
-          collectionUploadName != null &&
-          collectionUploadName != undefined
-        ) {
-          // Asegure-se de que você está pegando apenas o ID da imagem e não o objeto completo.
-          const imageId =
-            typeof newDoc.image === 'object' ? newDoc.image.id : newDoc.image;
-
-          image = await payload.findByID({
-            collection: collectionUploadName,
-            id: imageId,
-          });
-        }
-
-        // Variável para verificar se a imagem foi atualizada
-        let updateImage = false;
-
         // Verifica se o documento foi alterado
         if (!_.isEqual(newDoc, oldDoc)) {
           console.log('The document was changed.');
+
+          // Inicia a variavel null para se não existir newDoc.image
+          let image = null;
+
+          // Pega a imagem de começo pois vai ser utlizada em varias partes
+          if (
+            newDoc.image &&
+            collectionUploadName != null &&
+            collectionUploadName != undefined
+          ) {
+            // Asegure-se de que você está pegando apenas o ID da imagem e não o objeto completo.
+            const imageId =
+              typeof newDoc.image === 'object' ? newDoc.image.id : newDoc.image;
+
+            image = await payload.findByID({
+              collection: collectionUploadName,
+              id: imageId,
+            });
+          }
+
+          // Variável para verificar se a imagem foi atualizada
+          let updateImage = false;
 
           // Formata o documento para markdown
           const markdownFile = await formatMarkdown(
