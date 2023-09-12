@@ -102,10 +102,20 @@ const handleOrderedList = (block: any): string => {
 
       if (listItem.children && Array.isArray(listItem.children)) {
         listItem.children.forEach((child: any) => {
-          if (child.type === 'link') {
-            listItemContent += handleLink(child);
+          if (child.children) {
+            child.children.array.forEach((child: any) => {
+              if (child.type === 'link') {
+                listItemContent += handleLink(child);
+              } else {
+                listItemContent += formatMarkdownText(child);
+              }
+            });
           } else {
-            listItemContent += formatMarkdownText(child);
+            if (child.type === 'link') {
+              listItemContent += handleLink(child);
+            } else {
+              listItemContent += formatMarkdownText(child);
+            }
           }
         });
       }
