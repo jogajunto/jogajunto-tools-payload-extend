@@ -84,11 +84,23 @@ const handleOrderedList = (block) => {
             let listItemContent = `${index + 1}. `;
             if (listItem.children && Array.isArray(listItem.children)) {
                 listItem.children.forEach((child) => {
-                    if (child.type === 'link') {
-                        listItemContent += handleLink(child);
+                    if (child.children) {
+                        child.children.array.forEach((child) => {
+                            if (child.type === 'link') {
+                                listItemContent += handleLink(child);
+                            }
+                            else {
+                                listItemContent += formatMarkdownText(child);
+                            }
+                        });
                     }
                     else {
-                        listItemContent += formatMarkdownText(child);
+                        if (child.type === 'link') {
+                            listItemContent += handleLink(child);
+                        }
+                        else {
+                            listItemContent += formatMarkdownText(child);
+                        }
                     }
                 });
             }
