@@ -102,8 +102,8 @@ const handleOrderedList = (block: any): string => {
 
       if (listItem.children && Array.isArray(listItem.children)) {
         listItem.children.forEach((child: any) => {
-          if (child.children) {
-            child.children.array.forEach((child: any) => {
+          if (child.children && Array.isArray(child.children)) {
+            child.children.forEach((child: any) => {
               if (child.type === 'link') {
                 listItemContent += handleLink(child);
               } else {
