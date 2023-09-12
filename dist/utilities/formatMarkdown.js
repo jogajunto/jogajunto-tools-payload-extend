@@ -59,11 +59,23 @@ const handleUnorderedList = (block) => {
             let listItemContent = '- ';
             if (listItem.children && Array.isArray(listItem.children)) {
                 listItem.children.forEach((child) => {
-                    if (child.type === 'link') {
-                        listItemContent += handleLink(child);
+                    if (child.children && Array.isArray(child.children)) {
+                        child.children.forEach((child) => {
+                            if (child.type === 'link') {
+                                listItemContent += handleLink(child);
+                            }
+                            else {
+                                listItemContent += formatMarkdownText(child);
+                            }
+                        });
                     }
                     else {
-                        listItemContent += formatMarkdownText(child);
+                        if (child.type === 'link') {
+                            listItemContent += handleLink(child);
+                        }
+                        else {
+                            listItemContent += formatMarkdownText(child);
+                        }
                     }
                 });
             }
