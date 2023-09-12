@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const js_yaml_1 = __importDefault(require("js-yaml"));
-const lodash_1 = __importDefault(require("lodash"));
 const formatMarkdownText = (child) => {
     let text = child.text;
     if (child.bold) {
@@ -35,6 +34,130 @@ const handleLink = (child) => {
     }
     return text;
 };
+/**
+ * Formata os blocos de tipo cabeçalho (h1-h6).
+ * @param block - O bloco a ser processado.
+ * @param markdownTag - A tag markdown correspondente.
+ * @returns O texto formatado.
+ */
+const handleHeader = (block, markdownTag) => {
+    if (block.children && block.children[0] && block.children[0].text) {
+        return `${markdownTag} ${block.children[0].text}\n\n`;
+    }
+    console.log(`Error: Invalid header block format: ${JSON.stringify(block)}`);
+    return '';
+};
+/**
+ * Processa um bloco do tipo lista não ordenada (ul).
+ * @param block - O bloco a ser processado.
+ * @returns O texto formatado.
+ */
+const handleUnorderedList = (block) => {
+    let content = '';
+    if (Array.isArray(block.children)) {
+        block.children.forEach((listItem) => {
+            let listItemContent = '- ';
+            if (listItem.children && Array.isArray(listItem.children)) {
+                listItem.children.forEach((child) => {
+                    if (child.type === 'link') {
+                        listItemContent += handleLink(child);
+                    }
+                    else {
+                        listItemContent += formatMarkdownText(child);
+                    }
+                });
+            }
+            content += `${listItemContent}\n`;
+        });
+    }
+    return content;
+};
+/**
+ * Processa um bloco do tipo lista ordenada (ol).
+ * @param block - O bloco a ser processado.
+ * @returns O texto formatado.
+ */
+const handleOrderedList = (block) => {
+    let content = '';
+    if (Array.isArray(block.children)) {
+        block.children.forEach((listItem, index) => {
+            let listItemContent = `${index + 1}. `;
+            if (listItem.children && Array.isArray(listItem.children)) {
+                listItem.children.forEach((child) => {
+                    if (child.type === 'link') {
+                        listItemContent += handleLink(child);
+                    }
+                    else {
+                        listItemContent += formatMarkdownText(child);
+                    }
+                });
+            }
+            content += `${listItemContent}\n`;
+        });
+    }
+    return content;
+};
+/**
+ * Formata blocos de tipo blockquote.
+ * @param block - O bloco a ser processado.
+ * @returns O texto formatado.
+ */
+const handleBlockquote = (block) => {
+    if (block.children && block.children[0] && block.children[0].text) {
+        return `> ${block.children[0].text}\n\n`;
+    }
+    console.log(`Error: Invalid blockquote block format: ${JSON.stringify(block)}`);
+    return '';
+};
+/**
+ * Processa o bloco de upload, recuperando a URL da imagem e criando a tag de imagem markdown.
+ * @param block - O bloco a ser processado.
+ * @param payload - Instância do Payload para consultas.
+ * @returns O texto formatado.
+ */
+const handleUpload = async (block, payload) => {
+    if (block.value?.id) {
+        const mediaFile = await payload.findByID({
+            collection: 'media',
+            id: block.value.id,
+        });
+        if (mediaFile) {
+            return `![${mediaFile.filename}](${mediaFile.url})\n`;
+        }
+    }
+    console.log(`Error: Invalid upload block format: ${JSON.stringify(block)}`);
+    return '';
+};
+/**
+ * Formata blocos de outros tipos.
+ * @param block - O bloco a ser processado.
+ * @returns O texto formatado.
+ */
+const handleDefault = (block) => {
+    let content = '';
+    if (block.children) {
+        block.children.forEach((child) => {
+            if (child.type === 'link') {
+                content += handleLink(child);
+            }
+            else {
+                content += formatMarkdownText(child);
+            }
+        });
+        if (block.children.length > 0) {
+            content += '\n\n'; // Add two newlines to create a new paragraph in Markdown
+        }
+    }
+    return content;
+};
+/**
+ * Função principal para formatar o conteúdo em markdown.
+ * @param doc - Documento a ser formatado.
+ * @param collectionName - Nome da coleção.
+ * @param payload - Instância do Payload para consultas.
+ * @param formatters - Mapeamento de formatters.
+ * @returns O documento formatado.
+ */
 const formatMarkdown = async (doc, collectionName, payload, formatters) => {
     const dataFormatter = formatters[collectionName];
     if (!dataFormatter) {
@@ -42,141 +165,47 @@ const formatMarkdown = async (doc, collectionName, payload, formatters) => {
     }
     const data = await dataFormatter(doc, payload);
     let content = '\n';
-    // Loop in blocks content
+    // Processa cada bloco de conteúdo.
     if (doc.content) {
         for (const block of doc.content) {
-            console.log(block.type);
             switch (block.type) {
-                case 'h1': // Block type H2
-                    content += `# ${block.children[0].text}\n\n`;
+                case 'h1':
+                    content += handleHeader(block, '#');
                     break;
-                case 'h2': // Block type H2
-                    content += `## ${block.children[0].text}\n\n`;
+                case 'h2':
+                    content += handleHeader(block, '##');
                     break;
-                case 'h3': // Block type H2
-                    content += `### ${block.children[0].text}\n\n`;
+                case 'h3':
+                    content += handleHeader(block, '###');
                     break;
-                case 'h4': // Block type H2
-                    content += `#### ${block.children[0].text}\n\n`;
+                case 'h4':
+                    content += handleHeader(block, '####');
                     break;
-                case 'h5': // Block type H2
-                    content += `##### ${block.children[0].text}\n\n`;
+                case 'h5':
+                    content += handleHeader(block, '#####');
                     break;
-                case 'h6': // Block type H2
-                    content += `###### ${block.children[0].text}\n\n`;
-                    break;
-                case 'upload':
-                    if (block.value?.id) {
-                        // Block type Upload
-                        console.log('block_error', block);
-                        const idUpload = block.value.id;
-                        if (idUpload) {
-                            const mediaFile = await payload.findByID({
-                                collection: 'media',
-                                id: idUpload,
-                            });
-                            if (mediaFile) {
-                                const filename = mediaFile.filename;
-                                const urlFile = mediaFile.url;
-                                content += `![${filename}](${urlFile})\n`;
-                            }
-                        }
-                    }
+                case 'h6':
+                    content += handleHeader(block, '######');
                     break;
                 case 'ul':
-                    // Block type UL
-                    if (Array.isArray(block.children)) {
-                        block.children.forEach((listItem) => {
-                            content += '- ';
-                            listItem.children[0].children.forEach((child) => {
-                                if (child.type === 'link') {
-                                    content += handleLink(child);
-                                }
-                                else {
-                                    content += formatMarkdownText(child);
-                                }
-                            });
-                            content += '\n';
-                        });
-                    }
+                    content += handleUnorderedList(block);
                     break;
                 case 'ol':
-                    if (Array.isArray(block.children)) {
-                        block.children.forEach((listItem, index) => {
-                            content += `${index + 1}. `;
-                            if (listItem.children &&
-                                listItem.children[0] &&
-                                Array.isArray(listItem.children[0].children)) {
-                                listItem.children[0].children.forEach((child) => {
-                                    if (child.type === 'link') {
-                                        content += handleLink(child);
-                                    }
-                                    else {
-                                        content += formatMarkdownText(child);
-                                    }
-                                });
-                            }
-                            content += '\n';
-                        });
-                    }
+                    content += handleOrderedList(block);
                     break;
                 case 'blockquote':
-                    content += `> ${block.children[0].text}\n\n`;
+                    content += handleBlockquote(block);
+                    break;
+                case 'upload':
+                    content += await handleUpload(block, payload);
                     break;
                 default:
-                    if (block.children.text != '') {
-                        // Block type any
-                        block.children.forEach((child) => {
-                            let text = child.text;
-                            if (child.type === 'link') {
-                                if (Array.isArray(child.children)) {
-                                    child.children.forEach((linkChild) => {
-                                        let linkChildText = linkChild.text;
-                                        if (linkChild.bold) {
-                                            text = `[**${linkChildText}**](${child.url})`;
-                                        }
-                                        else if (linkChild.italic) {
-                                            text = `[_${linkChildText}_](${child.url})`;
-                                        }
-                                        else if (linkChild.strikethrough) {
-                                            text = `[~~${linkChildText}~~](${child.url})`;
-                                        }
-                                        else if (linkChild.underline) {
-                                            text = `[<u>${linkChildText}</u>](${child.url})`;
-                                        }
-                                        else {
-                                            text = `[${linkChildText}](${child.url})`;
-                                        }
-                                    });
-                                }
-                            }
-                            else {
-                                if (child.bold) {
-                                    text = `**${text}**`;
-                                }
-                                if (child.italic) {
-                                    text = `_${text}_`;
-                                }
-                                if (child.code) {
-                                    text = '```' + text + '```';
-                                }
-                                if (child.strikethrough) {
-                                    text = `~~${text}~~`;
-                                }
-                                if (child.underline) {
-                                    text = `<u>${text}</u>`;
-                                }
-                            }
-                            content += lodash_1.default.trim(text, '\n');
-                        });
-                        if (block.children.length > 0) {
-                            content += '\n\n'; // Add two newlines to create a new paragraph in Markdown
-                        }
-                    }
+                    content += handleDefault(block);
                     break;
             }
         }
     }
+    // Gera o conteúdo final combinando yaml e markdown.
     const yamlText = js_yaml_1.default.dump(data);
     const fileContent = `---\n${yamlText}---\n${content}`;
     return fileContent;
