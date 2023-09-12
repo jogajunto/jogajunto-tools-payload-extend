@@ -28,6 +28,12 @@ directoryImage // Imagem do diretório, se houver
                 // Remove campos desnecessários dos documentos antigo e novo
                 let oldDoc = lodash_1.default.omit(previousDoc, ['_id', '__v', 'updatedAt']);
                 let newDoc = lodash_1.default.omit(doc, ['updatedAt']);
+                // Transforma a propriedade 'image' do newDoc em uma string
+                if (newDoc.image &&
+                    typeof newDoc.image === 'object' &&
+                    newDoc.image.id) {
+                    newDoc.image = newDoc.image.id;
+                }
                 // Verifica se o documento foi alterado
                 if (!lodash_1.default.isEqual(newDoc, oldDoc)) {
                     console.log('The document was changed.');
