@@ -20,6 +20,7 @@ const TokenNewUsers = {
         useAsTitle: 'id',
         disableDuplicate: true,
         hideAPIURL: true,
+        group: 'Admin',
     },
     fields: [
         {
