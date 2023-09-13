@@ -17,6 +17,7 @@ const TokenNewUsers: CollectionConfig = {
     useAsTitle: 'id',
     disableDuplicate: true,
     hideAPIURL: true,
+    group: 'Admin',
   },
   fields: [
     {
