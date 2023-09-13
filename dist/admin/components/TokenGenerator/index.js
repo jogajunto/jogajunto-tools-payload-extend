@@ -6,7 +6,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const forms_1 = require("payload/components/forms");
 const utilities_1 = require("payload/components/utilities");
+const react_toastify_1 = require("react-toastify");
 const baseClass = 'tokenGenerator';
+const copyToClipboard = async (text) => {
+    try {
+        await navigator.clipboard.writeText(text);
+        react_toastify_1.toast.info('Link copiado!');
+    }
+    catch (err) {
+        console.error('Failed to copy text:', err);
+    }
+};
+const copyLinkToClipboard = (event) => {
+    copyToClipboard(event.target.value);
+};
 const TokenGenerator = ({ path, label, required }) => {
     const { value, setValue } = (0, forms_1.useField)({ path });
     const authentication = (0, utilities_1.useAuth)();
@@ -33,7 +46,9 @@ const TokenGenerator = ({ path, label, required }) => {
         value && (react_1.default.createElement("div", { className: 'link-new-user' },
             react_1.default.createElement("strong", null, "Envie o link de cadastro para o cliente:"),
             react_1.default.createElement("br", null),
-            react_1.default.createElement("textarea", { name: 'copy-link', id: 'copy-link', className: 'textarea-element', style: { width: '100%' }, readOnly: true, rows: 10, value: `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/admin/new-user?token=${value}` }))),
+            react_1.default.createElement("textarea", { name: 'copy-link', id: 'copy-link', className: 'textarea-element', style: { width: '100%' }, onClick: (event) => {
+                    copyLinkToClipboard(event);
+                }, readOnly: true, rows: 10, value: `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/admin/new-user?token=${value}` }))),
         react_1.default.createElement("button", { className: 'btn btn--style-primary btn--icon-style-without-border btn--size-medium btn--icon-position-right', id: 'generate-token', onClick: generateToken }, "Gerar Token")));
 };
 exports.default = TokenGenerator;
