@@ -20,3 +20,4 @@ __exportStar(require("./globalAfterDelete"), exports);
 __exportStar(require("./mediaAfterChange"), exports);
 __exportStar(require("./beforeDeleteAndQueue"), exports);
 __exportStar(require("./disableUpdateEmail"), exports);
+__exportStar(require("./validatePasswords"), exports);
