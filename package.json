@@ -23,7 +23,7 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "marked": "^7.0.5",
-    "payload": "^1.11.3",
+    "payload": "^1.15.5",
     "styled-components": "^6.0.7",
     "jsonwebtoken": "^9.0.2"
   },
@@ -37,6 +37,6 @@
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "payload": "^1.11.3"
+    "payload": "^1.15.5"
   }
 }
