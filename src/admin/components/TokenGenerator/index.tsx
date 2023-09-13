@@ -1,8 +1,22 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { TextInput, useField } from 'payload/components/forms';
 import { useAuth } from 'payload/components/utilities';
+import { toast } from 'react-toastify';
 
 const baseClass = 'tokenGenerator';
+
+const copyToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    toast.info('Link copiado!');
+  } catch (err) {
+    console.error('Failed to copy text:', err);
+  }
+}
+
+const copyLinkToClipboard = (event: any) => {
+  copyToClipboard(event.target.value);
+}
 
 const TokenGenerator: React.FC<any> = ({ path, label, required }) => {
   const { value, setValue } = useField<any>({ path });
@@ -45,6 +59,9 @@ const TokenGenerator: React.FC<any> = ({ path, label, required }) => {
             id='copy-link'
             className='textarea-element'
             style={{ width: '100%' }}
+            onClick={(event)=>{
+              copyLinkToClipboard(event);
+            }}
             readOnly={true}
             rows={10}
             value={`${process.env.PAYLOAD_PUBLIC_SERVER_URL}/admin/new-user?token=${value}`}
