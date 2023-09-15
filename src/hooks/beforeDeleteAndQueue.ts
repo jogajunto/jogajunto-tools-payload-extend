@@ -1,5 +1,5 @@
 /**
- * @module beforeDeleteAndQueue
+ * @module hooks/beforeDeleteAndQueue
  * @description Este módulo fornece um hook para ser utilizado antes da deleção de um 
  * documento em uma coleção no Payload CMS. O hook permite adicionar o documento a uma 
  * fila para processamento posterior, o que é útil para casos em que ações adicionais 

@@ -1,5 +1,5 @@
 /**
- * @module validatePasswords
+ * @module hooks/validatePasswords
  * @description Este módulo fornece um hook que valida senhas conforme critérios específicos 
  * antes da criação ou atualização de um documento no Payload CMS. O objetivo é garantir 
  * que as senhas definidas pelos usuários atendam a um conjunto de regras de segurança.

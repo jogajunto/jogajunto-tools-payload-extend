@@ -1,5 +1,5 @@
 /**
- * @module globalAfterChange
+ * @module hooks/globalAfterChange
  * @description Este módulo fornece um hook que é executado após qualquer 
  * mudança em um documento no Payload CMS. Este hook é responsável por 
  * comparar o documento atual com o anterior, formatá-lo para markdown (se 

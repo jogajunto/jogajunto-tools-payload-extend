@@ -1,5 +1,5 @@
 /**
- * @module globalAfterDelete
+ * @module hooks/globalAfterDelete
  * @description Este módulo fornece um hook que é executado após a exclusão 
  * de um documento no Payload CMS. Este hook é responsável por preparar 
  * os dados para serem enviados às Github Actions, informando sobre a 

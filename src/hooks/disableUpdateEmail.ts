@@ -1,5 +1,5 @@
 /**
- * @module disableUpdateEmail
+ * @module hooks/disableUpdateEmail
  * @description Este módulo fornece um hook para prevenir a atualização do campo de e-mail 
  * em uma coleção dentro do Payload CMS. O propósito do hook é garantir que, uma vez que 
  * um e-mail é definido ou criado, ele não pode ser modificado. Tentativas de atualizar 
