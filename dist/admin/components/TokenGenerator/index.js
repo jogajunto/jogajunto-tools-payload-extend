@@ -7,7 +7,14 @@ const react_1 = __importDefault(require("react"));
 const forms_1 = require("payload/components/forms");
 const utilities_1 = require("payload/components/utilities");
 const react_toastify_1 = require("react-toastify");
+// Classe base para o estilo do componente
 const baseClass = 'tokenGenerator';
+/**
+ * Função para copiar texto para a área de transferência do usuário.
+ * Apresenta uma notificação caso a operação seja bem-sucedida.
+ *
+ * @param {string} text - O texto a ser copiado.
+ */
 const copyToClipboard = async (text) => {
     try {
         await navigator.clipboard.writeText(text);
@@ -17,13 +24,34 @@ const copyToClipboard = async (text) => {
         console.error('Failed to copy text:', err);
     }
 };
+/**
+ * Função de auxílio para copiar o link para a área de transferência quando um evento é disparado.
+ *
+ * @param {any} event - O evento que dispara a função.
+ */
 const copyLinkToClipboard = (event) => {
     copyToClipboard(event.target.value);
 };
+/**
+ * Componente React para gerar tokens e disponibilizá-los em um campo de entrada para o usuário.
+ *
+ * @param path - Caminho associado ao campo de valor.
+ * @param label - Etiqueta para o campo de entrada.
+ * @param required - Flag que indica se o campo é obrigatório ou não.
+ * @returns {React.FC<any>} Componente React.
+ */
 const TokenGenerator = ({ path, label, required }) => {
+    // Utilizando hooks de campo e autenticação
     const { value, setValue } = (0, forms_1.useField)({ path });
     const authentication = (0, utilities_1.useAuth)();
+    // Obtendo o nome do campo do path fornecido
     const fieldName = path.split('.').pop();
+    /**
+     * Função assíncrona para gerar tokens quando acionada.
+     * Faz uma chamada API para obter o token e atualiza o valor do campo.
+     *
+     * @param {any} e - Evento que dispara a função.
+     */
     const generateToken = async (e) => {
         try {
             e.preventDefault();
@@ -41,6 +69,7 @@ const TokenGenerator = ({ path, label, required }) => {
             console.error('Erro ao gerar token:', error);
         }
     };
+    // Renderizando o componente
     return (react_1.default.createElement("div", { className: baseClass },
         react_1.default.createElement(forms_1.TextInput, { value: value, path: path, name: fieldName, label: label, readOnly: true, onChange: (e) => setValue(e.target.value) }),
         value && (react_1.default.createElement("div", { className: 'link-new-user' },

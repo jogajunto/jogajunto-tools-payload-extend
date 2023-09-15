@@ -1,15 +1,32 @@
 "use strict";
+/**
+ * @module utilities/markdownToContent
+ * @description Converte Markdown para um formato de conteúdo customizado.
+ */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.markdownToContent = void 0;
 const marked_1 = __importDefault(require("marked"));
+/**
+ * Verifica se o primeiro caractere da string é ., ,, ;, :, ! ou ?.
+ *
+ * @param {string} str - A string para verificar.
+ * @returns {boolean} Retorna verdadeiro se o primeiro caractere for um dos caracteres especificados.
+ */
 function checkFirstChar(str) {
     // Verifica se o primeiro caractere é ., ,, ;, :, ! ou ?
     const regex = /^[.,;:!?]/;
     return regex.test(str);
 }
+/**
+ * Processa os tokens filhos do Markdown e os converte em TextChild ou LinkChild.
+ *
+ * @param {any} childToken - O token filho para processar.
+ * @param {Partial<TextChild>=} formatting - Formatação adicional para aplicar.
+ * @returns {(TextChild | LinkChild)[]} Retorna uma lista de TextChild ou LinkChild.
+ */
 const handleChildTokens = (childToken, formatting = {}) => {
     const result = [];
     for (let i = 0; childToken.tokens && i < childToken.tokens.length; i++) {
@@ -57,6 +74,12 @@ const handleChildTokens = (childToken, formatting = {}) => {
     }
     return result;
 };
+/**
+ * Converte uma string Markdown em uma lista de blocos de conteúdo.
+ *
+ * @param {string} markdown - O texto em Markdown para converter.
+ * @returns {Block[]} Retorna uma lista de blocos de conteúdo.
+ */
 const markdownToContent = (markdown) => {
     // Usar o 'marked' para transformar o Markdown em tokens
     const tokens = marked_1.default.lexer(markdown);

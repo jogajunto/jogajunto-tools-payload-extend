@@ -39,9 +39,16 @@ const Text_1 = __importDefault(require("payload/dist/admin/components/forms/fiel
 const ConfirmPassword_1 = __importDefault(require("payload/dist/admin/components/forms/field-types/ConfirmPassword"));
 const HiddenInput_1 = __importDefault(require("payload/dist/admin/components/forms/field-types/HiddenInput"));
 const Submit_1 = __importDefault(require("payload/dist/admin/components/forms/Submit"));
+/**
+ * Utilidade para retornar os parâmetros da query da URL atual.
+ * @returns URLSearchParams da localização atual.
+ */
 const useQuery = () => {
     return new URLSearchParams((0, react_router_dom_1.useLocation)().search);
 };
+/**
+ * Componente responsável por criar um novo usuário a partir de um token válido.
+ */
 const NewUser = () => {
     const config = (0, utilities_1.useConfig)();
     const { admin: { user: userSlug, logoutRoute }, serverURL, routes: { admin, api }, } = config;
@@ -56,13 +63,12 @@ const NewUser = () => {
     (0, react_1.useEffect)(() => {
         validateToken();
     });
+    /**
+     * Valida o token fornecido.
+     * Se o token for válido, o formulário é mostrado.
+     * Caso contrário, o usuário é redirecionado para uma página não autorizada.
+     */
     const validateToken = async () => {
-        /**
-         * Validar o token na collection TokenNewUsers.ts
-         *
-         * Se o token for válido a gente mostra o form para fazer o cadastro
-         * Se não ele joga para não autorizado
-         */
         try {
             const response = await fetch(`/validate-jsonwebtoken`, {
                 method: 'POST',
@@ -96,6 +102,11 @@ const NewUser = () => {
             react_toastify_1.toast.error(t(errorMessage));
         }
     };
+    /**
+     * Trata o sucesso após a criação de um novo usuário.
+     * Invalida o token após ser usado e atualiza o estado.
+     * @param data - Os dados do usuário após a criação.
+     */
     const onSuccess = async (data) => {
         try {
             if (data.doc?.id) {

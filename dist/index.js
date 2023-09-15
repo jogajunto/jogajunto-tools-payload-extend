@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @module index
+ * @description Módulo agregador para a raiz do projeto 'jogajunto-tools-payload-extend'.
+ * Este módulo reexporta módulos de diferentes categorias para facilitar a importação em outros locais do código.
+ */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);

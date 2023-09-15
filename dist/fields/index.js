@@ -15,6 +15,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
+ * @module fields
+ *
  * No contexto do projeto 'jogajunto-tools-payload-extend', os "fields" representam definições estruturadas que determinam a natureza e comportamento dos dados dentro de um payload. Cada "field" é projetado para encapsular um tipo específico de dado, como texto, número, data, entre outros, e pode conter propriedades adicionais, como validações, descrições e gatilhos específicos.
 
 Em uma visão mais ampla, pense nos "fields" como os tijolos fundamentais do payload. Eles dão significado e estrutura ao payload, garantindo que os dados contidos nele sejam consistentes e manipulados de forma adequada. Ao definir "fields" claros e bem documentados, proporcionamos uma maior robustez ao sistema e uma compreensão mais clara da natureza dos dados que estamos manipulando.

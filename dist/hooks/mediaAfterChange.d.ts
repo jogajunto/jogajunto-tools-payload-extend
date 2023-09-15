@@ -1,4 +1,5 @@
 /**
+ * @module hooks/mediaAfterChange
  * Hook para lidar com doc que são apenas mídia com um nome/slug
  */
 import { CollectionAfterChangeHook } from 'payload/types';

@@ -1,15 +1,40 @@
 "use strict";
+/**
+ * @module hooks/globalAfterChange
+ * @description Este módulo fornece um hook que é executado após qualquer
+ * mudança em um documento no Payload CMS. Este hook é responsável por
+ * comparar o documento atual com o anterior, formatá-lo para markdown (se
+ * houver alguma mudança), preparar a imagem (se atualizada) e, finalmente,
+ * enviar os dados formatados para as Github Actions.
+ *
+ * As funcionalidades principais incluem:
+ * 1. Comparar o documento anterior e o atual.
+ * 2. Formatar o documento em markdown.
+ * 3. Preparar a imagem para o repositório.
+ * 4. Enviar informações formatadas para as Github Actions.
+ */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.globalAfterChange = void 0;
-// Importações necessárias
 const lodash_1 = __importDefault(require("lodash"));
 const formatMarkdown_1 = __importDefault(require("../utilities/formatMarkdown"));
 const sendAction_1 = __importDefault(require("../utilities/actions/github/sendAction"));
 const prepareImageForRepository_1 = __importDefault(require("../utilities/prepareImageForRepository"));
-// Hook que será executado depois que um documento for alterado
+/**
+ * Hook para ser executado após qualquer mudança em um documento. Este hook
+ * compara o documento atual com o anterior, formata para markdown se houver
+ * alguma mudança, prepara a imagem se for atualizada e envia os dados
+ * formatados para as Github Actions.
+ *
+ * @param {CollectionName} collectionName - Nome da coleção que está sendo modificada.
+ * @param {string} directory - Diretório que está sendo modificado.
+ * @param {Record<CollectionName, FormatterCollection>} collectionFormatters - Objeto com as funções para formatar o markdown para cada coleção.
+ * @param {CollectionName} collectionUploadName - (Opcional) Nome da coleção para o upload de imagem que está sendo relacionada.
+ * @param {string} directoryImage - (Opcional) Caminho do diretório da imagem.
+ * @returns {CollectionAfterChangeHook} Hook para ser usado após uma mudança.
+ */
 const globalAfterChange = (collectionName, // Nome da coleção que está sendo modificada
 directory, // Diretório que está sendo modificado
 collectionFormatters, // Objeto com as funções de preparação para cada collections formatar seu markdown

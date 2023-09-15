@@ -1,5 +1,15 @@
 "use strict";
+/**
+ * @module utilities/prepareImageForRepository
+ * @description Prepara uma imagem para ser adicionada ao repositório.
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Valida e corrige a URL para garantir que seus componentes estejam corretamente codificados.
+ *
+ * @param {string} url - A URL da imagem.
+ * @returns {string} Retorna a URL corrigida.
+ */
 const validateAndCorrectURL = (url) => {
     // Usa a função 'encodeURIComponent' para codificar apenas os componentes da URL
     const urlParts = url.split('/');
@@ -9,6 +19,14 @@ const validateAndCorrectURL = (url) => {
     const correctedURL = [...urlParts, lastPartEncoded].join('/');
     return correctedURL;
 };
+/**
+ * Prepara uma imagem para ser adicionada ao payload do cliente e retorna a estrutura de dados atualizada.
+ *
+ * @param {GitData} data - Os dados iniciais do cliente.
+ * @param {string} directoryImage - O diretório onde a imagem será armazenada.
+ * @param {ImageType} image - Os dados da imagem a ser adicionada.
+ * @returns {Promise<GitData>} Retorna a estrutura de dados atualizada.
+ */
 const prepareImageForRepository = async (data, directoryImage, image) => {
     try {
         // Adiciona a imagem à payload do cliente

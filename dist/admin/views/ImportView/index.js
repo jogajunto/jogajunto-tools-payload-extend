@@ -34,11 +34,20 @@ const Button_1 = __importDefault(require("payload/dist/admin/components/elements
 const hooks_1 = require("payload/components/hooks");
 const Config_1 = require("payload/dist/admin/components/utilities/Config");
 const Meta_1 = __importDefault(require("payload/dist/admin/components/utilities/Meta"));
+/**
+ * View para importar dados em formato JSON para o Payload CMS.
+ *
+ * @param user - O usuário logado atualmente.
+ * @param canAccessAdmin - Indica se o usuário tem acesso à área de administração.
+ */
 const ImportView = ({ user, canAccessAdmin }) => {
+    // Hooks para obter configurações e definir etapas de navegação.
     const { routes: { admin: adminRoute }, } = (0, Config_1.useConfig)();
     const { setStepNav } = (0, hooks_1.useStepNav)();
+    // Estado local para armazenar o arquivo JSON e feedback para o usuário.
     const [file, setFile] = (0, react_1.useState)(null);
     const [feedback, setFeedback] = (0, react_1.useState)(null);
+    // Definindo a navegação para esta view.
     (0, react_1.useEffect)(() => {
         setStepNav([
             {
@@ -46,16 +55,20 @@ const ImportView = ({ user, canAccessAdmin }) => {
             },
         ]);
     }, [setStepNav]);
+    // Assegurando que um usuário não logado, não tenha acesso à view.
     const userRoles = user.roles;
     if (!user || (user && !canAccessAdmin) || userRoles.includes('editor')) {
         return react_1.default.createElement(react_router_dom_1.Redirect, { to: `${adminRoute}/unauthorized` });
     }
+    // Manipulador para capturar a seleção de arquivo.
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
             setFile(e.target.files[0]);
         }
     };
+    // Manipulador para realizar a importação do JSON.
     const handleImport = async () => {
+        // Configuração inicial do feedback.
         setFeedback({
             type: 'error',
             message: 'Nenhum arquivo selecionado!',
@@ -65,6 +78,7 @@ const ImportView = ({ user, canAccessAdmin }) => {
         const reader = new FileReader();
         reader.onload = async (event) => {
             try {
+                // Leitura e envio dos dados JSON para o endpoint de importação.
                 const jsonData = JSON.parse(event.target?.result);
                 const response = await fetch('/import-payload-data', {
                     method: 'POST',
@@ -74,6 +88,7 @@ const ImportView = ({ user, canAccessAdmin }) => {
                     body: JSON.stringify(jsonData),
                 });
                 const responseData = await response.json();
+                // Configurando feedback baseado na resposta do servidor.
                 if (response.ok) {
                     setFeedback({
                         type: 'success',
@@ -89,6 +104,7 @@ const ImportView = ({ user, canAccessAdmin }) => {
                 }
             }
             catch (error) {
+                // Tratando erros ao ler ou processar o arquivo.
                 let errorMessage = 'An unknown error occurred.';
                 if (error instanceof Error) {
                     errorMessage = error.message;
@@ -101,6 +117,7 @@ const ImportView = ({ user, canAccessAdmin }) => {
         };
         reader.readAsText(file);
     };
+    // Estilização dos componentes da View.
     const ImportViewContainer = (0, styled_components_1.default)(Minimal_1.default) `
     h1 {
       margin-bottom: 30px;

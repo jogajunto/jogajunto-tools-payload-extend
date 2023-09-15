@@ -1,3 +1,6 @@
+/**
+ * @module types
+ */
 export { GitData } from './GitData';
 export { ClientPayload } from './ClientPayload';
 export { EmailHTMLCTA } from './EmailHTMLCTA';

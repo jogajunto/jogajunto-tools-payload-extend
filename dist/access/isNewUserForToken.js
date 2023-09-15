@@ -1,9 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Verifica se um novo usuário pode ser criado para um token fornecido.
+ *
+ * @function
+ * @async
+ * @param {Object} args - Argumentos passados para a função.
+ * @param {Object} args.req - Objeto de requisição express.
+ * @param {string} args.id - ID associado ao usuário.
+ * @param {Object} args.data - Dados relacionados à requisição.
+ *
+ * @returns {boolean} Retorna `true` se um novo usuário pode ser criado para o token fornecido. Caso contrário, retorna `false`.
+ */
 const isNewUserForToken = async ({ req, id, data }) => {
-    /**
-     * In create new user for valid token return true
-     */
+    // Ao criar um novo usuário para um token válido, retorna verdadeiro
     if (req.body?.token) {
         if (req.user)
             return Boolean(false);
@@ -18,16 +28,12 @@ const isNewUserForToken = async ({ req, id, data }) => {
             return Boolean(true);
     }
     else {
-        /**
-         * Case user editor return false
-         */
+        // No caso de um usuário editor, retorna falso
         if (req.user)
             if (req.user?.roles.includes('admin'))
                 return Boolean(true);
     }
-    /**
-     * Another return false
-     */
+    // Para qualquer outro caso, retorna falso
     return Boolean(false);
 };
 exports.default = isNewUserForToken;

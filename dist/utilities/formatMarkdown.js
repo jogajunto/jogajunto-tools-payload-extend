@@ -1,9 +1,32 @@
 "use strict";
+/**
+ * @module utilities/formatMarkdown
+ * @description Este módulo fornece uma função principal para formatar o conteúdo de um documento em formato Markdown com blocos de metadados YAML no início.
+ *
+ * Principais características e funcionalidades:
+ *
+ * - Converte texto formatado em várias estilizações de Markdown, como negrito, itálico, riscado, código e sublinhado.
+ * - Suporta a formatação de links incorporados dentro do texto.
+ * - Processa blocos de cabeçalho (h1-h6) e converte-os em suas respectivas notações de Markdown.
+ * - Formata listas não ordenadas (ul) e listas ordenadas (ol).
+ * - Converte blocos de citação em formatação de citação Markdown.
+ * - Processa blocos de upload, convertendo-os em tags de imagem de Markdown.
+ * - Utiliza um conjunto de funções auxiliares para formatar cada tipo específico de bloco.
+ * - Se integra com o Payload CMS, usando sua API para buscar informações adicionais, se necessário.
+ * - Suporta formatação extensível através de mapeamentos de formatters.
+ *
+ * Este módulo é essencial para gerar arquivos em formato Markdown a partir de um conjunto de blocos estruturados.
+ */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const js_yaml_1 = __importDefault(require("js-yaml"));
+/**
+ * Processa textos e devolve com a formatação devida.
+ * @param child - Child com um text e tipo da formatação do texto.
+ * @returns {string} O texto formatado.
+ */
 const formatMarkdownText = (child) => {
     let text = child.text;
     if (child.bold) {
@@ -24,6 +47,11 @@ const formatMarkdownText = (child) => {
     }
     return text;
 };
+/**
+ * Formata links.
+ * @param child - Child com um text e url.
+ * @returns {string} O link formatado.
+ */
 const handleLink = (child) => {
     let text = '';
     if (Array.isArray(child.children)) {
@@ -38,7 +66,7 @@ const handleLink = (child) => {
  * Formata os blocos de tipo cabeçalho (h1-h6).
  * @param block - O bloco a ser processado.
  * @param markdownTag - A tag markdown correspondente.
- * @returns O texto formatado.
+ * @returns {string} O texto formatado.
  */
 const handleHeader = (block, markdownTag) => {
     if (block.children && block.children[0] && block.children[0].text) {
@@ -50,7 +78,7 @@ const handleHeader = (block, markdownTag) => {
 /**
  * Processa um bloco do tipo lista não ordenada (ul).
  * @param block - O bloco a ser processado.
- * @returns O texto formatado.
+ * @returns {string} O texto formatado.
  */
 const handleUnorderedList = (block) => {
     let content = '';
@@ -87,7 +115,7 @@ const handleUnorderedList = (block) => {
 /**
  * Processa um bloco do tipo lista ordenada (ol).
  * @param block - O bloco a ser processado.
- * @returns O texto formatado.
+ * @returns {string} O texto formatado.
  */
 const handleOrderedList = (block) => {
     let content = '';
@@ -124,7 +152,7 @@ const handleOrderedList = (block) => {
 /**
  * Formata blocos de tipo blockquote.
  * @param block - O bloco a ser processado.
- * @returns O texto formatado.
+ * @returns {string} O texto formatado.
  */
 const handleBlockquote = (block) => {
     if (block.children && block.children[0] && block.children[0].text) {
@@ -137,7 +165,7 @@ const handleBlockquote = (block) => {
  * Processa o bloco de upload, recuperando a URL da imagem e criando a tag de imagem markdown.
  * @param block - O bloco a ser processado.
  * @param payload - Instância do Payload para consultas.
- * @returns O texto formatado.
+ * @returns {string} O texto formatado.
  */
 const handleUpload = async (block, payload) => {
     if (block.value?.id) {
@@ -180,7 +208,7 @@ const handleDefault = (block) => {
  * @param collectionName - Nome da coleção.
  * @param payload - Instância do Payload para consultas.
  * @param formatters - Mapeamento de formatters.
- * @returns O documento formatado.
+ * @returns {string} O documento formatado.
  */
 const formatMarkdown = async (doc, collectionName, payload, formatters) => {
     const dataFormatter = formatters[collectionName];
