@@ -1,4 +1,10 @@
-// Importando a função 'formatSlugString' (ajuste o caminho conforme necessário)
+/**
+ * @module splitFilename
+ * @description Este módulo fornece funções para manipular e formatar nomes de arquivos. 
+ * Ele inclui utilidades para dividir nomes de arquivos em nome e extensão, 
+ * bem como formatar uma string contendo um nome de arquivo como um slug mantendo sua extensão.
+ */
+
 import { formatSlugString } from './formatSlugString';
 
 /**

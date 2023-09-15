@@ -14,10 +14,17 @@ import Submit from 'payload/dist/admin/components/forms/Submit';
 import { AdminView } from 'payload/config';
 import { UserType } from '../../../types/UserType';
 
+/**
+ * Utilidade para retornar os parâmetros da query da URL atual.
+ * @returns URLSearchParams da localização atual.
+ */
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
+/**
+ * Componente responsável por criar um novo usuário a partir de um token válido.
+ */
 const NewUser: AdminView = () => {
   const config = useConfig();
   const {
@@ -38,13 +45,12 @@ const NewUser: AdminView = () => {
     validateToken();
   });
 
+  /**
+   * Valida o token fornecido.
+   * Se o token for válido, o formulário é mostrado.
+   * Caso contrário, o usuário é redirecionado para uma página não autorizada.
+   */
   const validateToken = async () => {
-    /**
-     * Validar o token na collection TokenNewUsers.ts
-     *
-     * Se o token for válido a gente mostra o form para fazer o cadastro
-     * Se não ele joga para não autorizado
-     */
     try {
       const response = await fetch(`/validate-jsonwebtoken`, {
         method: 'POST',
@@ -76,6 +82,11 @@ const NewUser: AdminView = () => {
     }
   };
 
+  /**
+   * Trata o sucesso após a criação de um novo usuário.
+   * Invalida o token após ser usado e atualiza o estado.
+   * @param data - Os dados do usuário após a criação.
+   */
   const onSuccess = async (data: UserType | any) => {
     try {
       if (data.doc?.id) {
