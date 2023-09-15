@@ -1,5 +1,5 @@
 /**
- * @module prepareImageForRepository
+ * @module utilities/prepareImageForRepository
  * @description Prepara uma imagem para ser adicionada ao repositório.
  */
 

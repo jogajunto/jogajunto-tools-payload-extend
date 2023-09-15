@@ -1,5 +1,5 @@
 /**
- * @module markdownToContent
+ * @module utilities/markdownToContent
  * @description Converte Markdown para um formato de conteúdo customizado.
  */
 
