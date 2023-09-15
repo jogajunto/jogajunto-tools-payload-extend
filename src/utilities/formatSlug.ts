@@ -1,5 +1,5 @@
 /**
- * @module formatSlug
+ * @module utilities/formatSlug
  */
 
 import { FieldHook } from 'payload/types';

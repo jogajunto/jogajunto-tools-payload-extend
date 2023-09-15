@@ -1,5 +1,5 @@
 /**
- * @module formatSlugString
+ * @module utilities/formatSlugString
  * @description Este módulo fornece utilidades para formatar strings em formato de slug. 
  * Ele contém funções que ajudam a transformar strings comuns em strings slugificadas 
  * adequadas para URLs, nomes de arquivos, identificadores e outros casos de uso em que 

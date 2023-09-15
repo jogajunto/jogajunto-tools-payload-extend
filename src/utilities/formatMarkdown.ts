@@ -1,5 +1,5 @@
 /**
- * @module formatMarkdown
+ * @module utilities/formatMarkdown
  * @description Este módulo fornece uma função principal para formatar o conteúdo de um documento em formato Markdown com blocos de metadados YAML no início. 
  * 
  * Principais características e funcionalidades:
