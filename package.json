@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "docs": "typedoc --entryPointStrategy expand"
+    "docs": "rm -rf docs && typedoc --entryPointStrategy expand"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
