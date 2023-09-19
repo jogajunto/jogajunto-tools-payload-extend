@@ -144,6 +144,7 @@ const processQueue = async () => {
         else {
             console.error('Erro durante o processo de execussão da fila:', error);
         }
+        throw error;
     }
 };
 exports.processQueue = processQueue;
