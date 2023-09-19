@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "docs": "rm -rf docs && typedoc --entryPointStrategy expand"
+    "docs": "rm -rf docs && typedoc --entryPointStrategy expand",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
