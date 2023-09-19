@@ -1,4 +1,4 @@
-import { isEditorOrOwnsDocument, isEditor } from '../../dist/access/isEditor';
+import { isEditorOrOwnsDocument, isEditor } from '../../src/access/isEditor';
 
 describe('isEditorOrOwnsDocument', () => {
   // Teste para verificar se um usuário admin tem permissão total

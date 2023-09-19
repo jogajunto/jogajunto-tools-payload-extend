@@ -1,4 +1,4 @@
-import { isAuthenticated } from '../../dist/access/isAuthenticated';
+import { isAuthenticated } from '../../src/access/isAuthenticated';
 
 describe('isAuthenticated', () => {
   it('should return true if the user is authenticated', () => {

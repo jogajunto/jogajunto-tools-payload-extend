@@ -1,4 +1,4 @@
-import isNewUserForToken from '../../dist/access/isNewUserForToken'; // Atualize para o caminho correto
+import isNewUserForToken from '../../src/access/isNewUserForToken'; // Atualize para o caminho correto
 
 describe('isNewUserForToken', () => {
   // Ao criar um novo usuário para um token válido

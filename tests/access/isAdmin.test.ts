@@ -1,4 +1,4 @@
-import { isAdmin, isAdminFieldLevel } from '../../dist/access/isAdmin';
+import { isAdmin, isAdminFieldLevel } from '../../src/access/isAdmin';
 
 describe('isAdmin', () => {
   it('should return true if user has admin role', () => {
