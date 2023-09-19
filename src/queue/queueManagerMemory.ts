@@ -1,7 +1,7 @@
 /**
  * @module queueManagerMemory
  * @description Este módulo gerencia uma fila de operações em memória que precisam ser processadas e enviadas para o GitHub.
- * O principal objetivo é garantir que as operações sejam processadas sequencialmente, e que não sobrecarreguem 
+ * O principal objetivo é garantir que as operações sejam processadas sequencialmente, e que não sobrecarreguem
  * os serviços com muitas solicitações simultâneas.
  *
  * Principais características:
@@ -10,8 +10,8 @@
  * - Recupera os itens atualmente na fila.
  * - Envia operações ao GitHub, formatando os documentos para markdown quando necessário.
  * - Processa a fila sequencialmente, com um atraso entre as solicitações para evitar excesso de chamadas.
- * 
- * Esse módulo ajuda a assegurar que as operações no Payload CMS sejam refletidas no GitHub de maneira ordenada e eficiente, 
+ *
+ * Esse módulo ajuda a assegurar que as operações no Payload CMS sejam refletidas no GitHub de maneira ordenada e eficiente,
  * reduzindo a chance de conflitos e erros.
  */
 
@@ -177,5 +177,6 @@ export const processQueue = async () => {
     } else {
       console.error('Erro durante o processo de execussão da fila:', error);
     }
+    throw error;
   }
 };
