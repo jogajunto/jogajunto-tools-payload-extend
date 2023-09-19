@@ -26,12 +26,9 @@ const isNewUserForToken = async ({ req, id, data }) => {
         });
         if (response.docs.length > 0)
             return Boolean(true);
-    }
-    else {
-        // No caso de um usuário editor, retorna falso
-        if (req.user)
-            if (req.user?.roles.includes('admin'))
-                return Boolean(true);
+    } // Se o usuário existe e é um admin
+    else if (req.user && req.user?.roles.includes('admin')) {
+        return Boolean(true);
     }
     // Para qualquer outro caso, retorna falso
     return Boolean(false);
