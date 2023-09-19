@@ -16,17 +16,17 @@
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
-    "@types/styled-components": "^5.1.26",
     "@types/jsonwebtoken": "^9.0.2",
+    "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "js-yaml": "^4.1.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "marked": "^7.0.5",
     "payload": "^1.15.5",
-    "styled-components": "^6.0.7",
-    "jsonwebtoken": "^9.0.2"
+    "styled-components": "^6.0.7"
   },
   "devDependencies": {
     "@types/jest": "^29.5.5",
@@ -38,7 +38,7 @@
     "ts-jest": "^29.1.1",
     "ts-node": "^9.1.1",
     "typedoc": "^0.24.8",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "payload": "^1.15.5"
