@@ -28,7 +28,7 @@ const Generate = (req: any, res: any) => {
         const data: PayloadData = JSON.parse(rawData);
 
         // Verificando a validade dos dados e se o usuário tem a role 'admin'
-        if (!data || !data.user.roles.includes('admin')) {
+        if (!data || !data.user || !data.user.roles.includes('admin')) {
           return res.status(400).send({ message: 'Não encontrado' });
         }
 
