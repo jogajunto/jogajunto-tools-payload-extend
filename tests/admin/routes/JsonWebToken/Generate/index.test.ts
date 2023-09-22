@@ -29,6 +29,16 @@ describe('Generate function', () => {
         process.env.PAYLOAD_SECRET = 'test_secret';
     });
 
+  beforeAll(() => {
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    (console.log as jest.Mock).mockRestore();
+    (console.error as jest.Mock).mockRestore();
+  });
+
     // Deve gerar um token JWT para o usuário administrador
     it('should generate a JWT token for admin user', () => {
         (jwt.sign as jest.Mock).mockReturnValue('mocked_token');
