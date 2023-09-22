@@ -4,7 +4,7 @@ import { disableUpdateEmail } from '../../src/hooks/disableUpdateEmail';
 type CreateOrUpdateOperation = Extract<HookOperationType, 'create' | 'update'>;
 
 describe('disableUpdateEmail', () => {
-  // Teste deve gerar um erro se o e-mail for alterado durante uma operação de atualização
+  // Deve gerar um erro se o e-mail for alterado durante uma operação de atualização
   it('should throw an error if email is changed during an update operation', async () => {
     const originalDoc = {
       email: 'original@email.com',
@@ -27,7 +27,7 @@ describe('disableUpdateEmail', () => {
     );
   });
 
-  // Teste não deve gerar um erro se o e-mail não for alterado durante uma operação de atualização
+  // Não deve gerar um erro se o e-mail não for alterado durante uma operação de atualização
   it('should not throw an error if email is not changed during an update operation', async () => {
     const originalDoc = {
       email: 'same@email.com',
@@ -48,6 +48,7 @@ describe('disableUpdateEmail', () => {
     expect(result).toBe(data); // O e-mail não foi alterado, por isso não deve haver erro
   });
 
+  // Não deve gerar um erro se a operação não for uma atualização
   it('should not throw an error if operation is not an update', async () => {
     const data = {
       email: 'new@email.com',

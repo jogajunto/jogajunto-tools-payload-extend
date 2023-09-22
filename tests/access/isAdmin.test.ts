@@ -1,6 +1,8 @@
 import { isAdmin, isAdminFieldLevel } from '../../src/access/isAdmin';
 
+// Acesso a coleção
 describe('isAdmin', () => {
+  // Deve retornar verdadeiro se o usuário tiver função de administrador
   it('should return true if user has admin role', () => {
     const mockReq = {
       user: {
@@ -14,6 +16,7 @@ describe('isAdmin', () => {
     expect(result).toBe(true);
   });
 
+  // Deve retornar falso se o usuário não tiver função de administrador
   it('should return false if user does not have admin role', () => {
     const mockReq = {
       user: {
@@ -28,7 +31,9 @@ describe('isAdmin', () => {
   });
 });
 
+// Acesso a fields
 describe('isAdminFieldLevel', () => {
+  // Deve retornar verdadeiro se o usuário tiver função de administrador
   it('should return true if user has admin role', () => {
     const mockReq = {
       user: {
@@ -42,6 +47,7 @@ describe('isAdminFieldLevel', () => {
     expect(result).toBe(true);
   });
 
+  // Deve retornar falso se o usuário não tiver função de administrador
   it('should return false if user does not have admin role', () => {
     const mockReq = {
       user: {

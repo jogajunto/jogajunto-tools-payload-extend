@@ -1,7 +1,7 @@
 import { isEditorOrOwnsDocument, isEditor } from '../../src/access/isEditor';
 
 describe('isEditorOrOwnsDocument', () => {
-  // Teste para verificar se um usuário admin tem permissão total
+  // Deve retornar verdadeiro se o usuário tiver função de administrador
   it('should return true if user has admin role', () => {
     const mockReq = {
       user: {
@@ -14,8 +14,8 @@ describe('isEditorOrOwnsDocument', () => {
     expect(result).toBe(true);
   });
 
-  // Teste para verificar se um usuário editor tem acesso ao próprio documento
-  it('should return condition object if user has editor role', () => {
+  // Deve retornar o objeto de condição se o usuário tiver a função de editor e o documento de usuário acessado for dele
+  it('should return the condition object if the user has the editor role and the accessed user document is theirs', () => {
     const mockReq = {
       user: {
         id: '12345',
@@ -31,7 +31,7 @@ describe('isEditorOrOwnsDocument', () => {
     });
   });
 
-  // Teste para verificar se um usuário sem o papel de editor ou admin é negado
+  // Deve retornar falso se o usuário não tiver função de editor ou administrador
   it('should return false if user does not have editor or admin role', () => {
     const mockReq = {
       user: {
@@ -46,7 +46,7 @@ describe('isEditorOrOwnsDocument', () => {
 });
 
 describe('isEditor', () => {
-  // Teste para verificar se um usuário editor retorna verdadeiro
+  // Deve retornar verdadeiro se o usuário tiver função de editor
   it('should return true if user has editor role', () => {
     const mockReq = {
       user: {
@@ -58,7 +58,7 @@ describe('isEditor', () => {
     expect(result).toBe(true);
   });
 
-  // Teste para verificar se um usuário que não é editor retorna falso
+  // Deve retornar falso se o usuário não tiver função de editor
   it('should return false if user does not have editor role', () => {
     const mockReq = {
       user: {

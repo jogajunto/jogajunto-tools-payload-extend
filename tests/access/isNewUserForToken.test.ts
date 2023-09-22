@@ -1,7 +1,7 @@
 import isNewUserForToken from '../../src/access/isNewUserForToken'; // Atualize para o caminho correto
 
 describe('isNewUserForToken', () => {
-  // Ao criar um novo usuário para um token válido
+  // Deve retornar verdadeiro para token válido
   it('should return true for valid token', async () => {
     const mockReq = {
       body: { token: 'validToken' },
@@ -15,7 +15,7 @@ describe('isNewUserForToken', () => {
     expect(result).toBe(true);
   });
 
-  // Quando um usuário existente tenta usar um token válido
+  // Deve retornar falso para um usuário existente tentando com um token válido
   it('should return false for an existing user trying with valid token', async () => {
     const mockReq = {
       body: { token: 'validToken' },
@@ -29,7 +29,7 @@ describe('isNewUserForToken', () => {
     expect(result).toBe(false);
   });
 
-  // Quando um token inválido é usado
+  // Deve retornar falso para um token inválido
   it('should return false for an invalid token', async () => {
     const mockReq = {
       body: { token: 'invalidToken' },
@@ -43,7 +43,7 @@ describe('isNewUserForToken', () => {
     expect(result).toBe(false);
   });
 
-  // Quando um usuário com papel de admin está criando
+  // Deve retornar verdadeiro para um usuário administrador
   it('should return true for an admin user', async () => {
     const mockReq = {
       body: {},
@@ -57,7 +57,7 @@ describe('isNewUserForToken', () => {
     expect(result).toBe(true);
   });
 
-  // Para qualquer outro caso
+  // Deve retornar falso para qualquer outro caso
   it('should return false for any other case', async () => {
     const mockReq = {
       body: {},

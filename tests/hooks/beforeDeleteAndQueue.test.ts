@@ -24,6 +24,7 @@ describe('beforeDeleteAndQueue', () => {
     jest.resetAllMocks();
   });
 
+  // Deve buscar o documento por ID e adicioná-lo à fila
   it('should fetch the document by ID and add it to the queue', async () => {
     // Setup para que payload.findByID retorne um documento mockado
     (payload.findByID as jest.Mock).mockResolvedValue(mockDocument);
@@ -53,7 +54,7 @@ describe('beforeDeleteAndQueue', () => {
     );
   });
 
-  // Testa o funcionamento de throw em payload.findByID e verifica se o addToQueue realmente não é chamado já que vai existir um erro em payload.findByID
+  // Não deve chamar o addToQueue caso aconteça um throw em payload.findByID
   it('should throw an error when payload.findByID throws an error', async () => {
     // Mockando payload.findByID para lançar um erro
     (payload.findByID as jest.Mock).mockImplementationOnce(() => {
