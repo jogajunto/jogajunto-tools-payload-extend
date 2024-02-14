@@ -3,4 +3,5 @@
  */
 export interface ImageType {
   url: string;
+  id: any;
 }

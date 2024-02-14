@@ -69,7 +69,7 @@ export const globalAfterChange = (
           console.log('The document was changed.');
 
           // Inicia a variavel null para se não existir newDoc.image
-          let image = null;
+          let image: ImageType | null = null;
 
           // Pega a imagem de começo pois vai ser utlizada em varias partes
           if (
@@ -116,7 +116,7 @@ export const globalAfterChange = (
             },
           };
 
-          if (updateImage && directoryImage && image.url) {
+          if (updateImage && directoryImage && image?.url) {
             data = await prepareImageForRepository(data, directoryImage, image);
           }
 

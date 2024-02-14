@@ -14,9 +14,9 @@ import { UserType } from '../types/UserType';
 export const isEditorOrOwnsDocument: Access<any, UserType> = ({ req }) => {
   const user = req.user;
 
-  if (Boolean(user?.roles?.includes('admin'))) return true;
+  if (user && Boolean(user?.roles?.includes('admin'))) return true;
 
-  if (Boolean(user?.roles?.includes('editor'))) {
+  if (user && Boolean(user?.roles?.includes('editor'))) {
     return {
       id: {
         equals: user.id,
