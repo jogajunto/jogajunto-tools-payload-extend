@@ -44,7 +44,7 @@ const ImportView: AdminView = ({ user, canAccessAdmin }) => {
   }, [setStepNav]);
 
   // Assegurando que um usuário não logado, não tenha acesso à view.
-  const userRoles: any = user.roles;
+  const userRoles: any = user?.roles;
   if (!user || (user && !canAccessAdmin) || userRoles.includes('editor')) {
     return <Redirect to={`${adminRoute}/unauthorized`} />;
   }
