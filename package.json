@@ -4,11 +4,6 @@
   "description": "Biblioteca para modularizar componentes do Payload CMS.",
   "main": "dist/index.js",
   "license": "MIT",
-  "engines": {
-    "node": "18.8.0",
-    "yarn": "1.22.19",
-    "npm": "8.18.0"
-  },
   "scripts": {
     "build": "rm -rf dist && tsc",
     "docs": "rm -rf docs && typedoc --entryPointStrategy expand",
