@@ -23,7 +23,7 @@ const Validate = (req: any, res: any) => {
         const token = JSON.parse(rawData).token;
 
         // Busca pelo token no sistema para verificar se ele é válido e ainda não foi usado.
-        const response = await payload.find({
+        const response: any = await payload.find({
           collection: 'tokennewusers',
           where: {
             token: { equals: token },
@@ -37,7 +37,7 @@ const Validate = (req: any, res: any) => {
         }
 
         // Pega o token encontrado na resposta.
-        const findToken = response.docs[0].token;
+        const findToken: string = response.docs[0].token;
 
         // Define a chave secreta para a validação do token.
         const secret = process.env.PAYLOAD_SECRET ?? 'secret_key';
