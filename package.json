@@ -21,7 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "marked": "^7.0.5",
-    "payload": "^1.15.5",
+    "payload": "^2.0.0",
     "styled-components": "^6.0.7"
   },
   "devDependencies": {
@@ -40,6 +40,6 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "payload": "^1.15.5"
+    "payload": "^2.0.0"
   }
 }
