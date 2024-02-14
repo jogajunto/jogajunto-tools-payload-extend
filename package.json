@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "prepare": "echo 'Running prepare script jogajunto-tools-payload-extend' && npm run build",
+    "postinstall": "echo 'Running postinstall script jogajunto-tools-payload-extend' && yarn run build",
     "build": "tsc",
     "docs": "rm -rf docs && typedoc --entryPointStrategy expand",
     "test": "jest --coverage"
