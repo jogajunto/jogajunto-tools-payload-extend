@@ -3,7 +3,7 @@
  * @description Prepara uma imagem para ser adicionada ao repositório.
  */
 
-import { GitData, ImageType } from '../types';
+import { GitData } from '../types';
 
 /**
  * Valida e corrige a URL para garantir que seus componentes estejam corretamente codificados.
@@ -28,13 +28,13 @@ const validateAndCorrectURL = (url: string): string => {
  * 
  * @param {GitData} data - Os dados iniciais do cliente.
  * @param {string} directoryImage - O diretório onde a imagem será armazenada.
- * @param {ImageType} image - Os dados da imagem a ser adicionada.
+ * @param {any} image - Os dados da imagem a ser adicionada.
  * @returns {Promise<GitData>} Retorna a estrutura de dados atualizada.
  */
 const prepareImageForRepository = async (
   data: GitData,
   directoryImage: string,
-  image: ImageType
+  image: any
 ) => {
   try {
     // Adiciona a imagem à payload do cliente
