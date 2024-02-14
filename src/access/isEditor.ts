@@ -12,7 +12,7 @@ import { UserType } from '../types/UserType';
  * @returns {boolean|Object} Retorna verdadeiro se tiver permissão total, um objeto de condição se for restrito, ou falso para negar acesso.
  */
 export const isEditorOrOwnsDocument: Access<any, UserType> = ({ req }) => {
-  const user = req.user;
+  const user: any = req.user;
 
   if (user && Boolean(user?.roles?.includes('admin'))) return true;
 
