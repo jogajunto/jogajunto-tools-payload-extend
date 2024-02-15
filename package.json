@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "echo 'Running postinstall script jogajunto-tools-payload-extend' && yarn run build",
-    "build": "./node_modules/typescript/bin/tsc",
+    "build": "./node_modules/.bin/tsc",
     "docs": "rm -rf docs && typedoc --entryPointStrategy expand",
     "test": "jest --coverage"
   },
