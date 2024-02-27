@@ -11,12 +11,15 @@
     "test": "jest --coverage"
   },
   "dependencies": {
+    "@lexical/markdown": "^0.13.1",
     "@types/js-yaml": "^4.0.5",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/lodash": "^4.14.195",
     "@types/node": "^20.5.0",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
+    "@payloadcms/richtext-lexical": "^0.6.1",
+    "@payloadcms/richtext-slate": "^1.0.0",
     "axios": "^1.4.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
