@@ -13,17 +13,17 @@
   "dependencies": {
     "@types/js-yaml": "^4.0.5",
     "@types/jsonwebtoken": "^9.0.2",
-    "@types/styled-components": "^5.1.26",
-    "@types/react-router-dom": "^5.3.3",
     "@types/lodash": "^4.14.195",
     "@types/node": "^20.5.0",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
     "cross-env": "^7.0.3",
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.4.5",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
-    "marked": "^7.0.5",
+    "marked": "^12.0.0",
     "payload": "^2.0.0",
     "styled-components": "^6.0.7",
     "typescript": "^5.2.2"
@@ -36,8 +36,8 @@
     "jest": "^29.7.0",
     "prettier": "^3.0.0",
     "ts-jest": "^29.1.1",
-    "ts-node": "^9.1.1",
-    "typedoc": "^0.24.8"
+    "ts-node": "^10.9.2",
+    "typedoc": "^0.25.9"
   },
   "peerDependencies": {
     "payload": "^2.0.0"
