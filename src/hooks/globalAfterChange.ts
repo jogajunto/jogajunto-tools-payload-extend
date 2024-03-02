@@ -43,14 +43,17 @@ export const globalAfterChange = (
 ): CollectionAfterChangeHook => {
   return async ({
     doc, // Dados completos do documento
-    req: { payload }, // Requisição completa do express, transformada em payload para operações de busca
+    req: { payload, payloadAPI }, // Requisição completa do express, transformada em payload para operações de busca
     previousDoc, // Dados do documento antes de ser modificado
     operation, // Nome da operação, ex: 'create', 'update'
   }) => {
     try {
       let preserveDocForReturn: any = doc;
       // Verifica se a operação é de criação ou atualização
-      if (operation === 'update' || operation === 'create') {
+      if (
+        payloadAPI !== 'local' &&
+        (operation === 'update' || operation === 'create')
+      ) {
         // Remove campos desnecessários dos documentos antigo e novo
         let oldDoc = _.omit(previousDoc, ['_id', '__v', 'updatedAt']);
         let newDoc = _.omit(doc, ['updatedAt']);
