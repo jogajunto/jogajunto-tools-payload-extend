@@ -18,6 +18,8 @@ Certifique-se de definir as seguintes variáveis de ambiente:
 - DISCORD_CODENZBOT_WEBHOOK: URL do webhook do Discord.
 - GITHUB_TOKEN: Token de acesso pessoal do GitHub.
 - REPOSITORY_DISPATCH_URL: URL do repositório para disparar ações.
+- PAYLOAD_EXTEND_COLLECTION_UPLOADS: Slug da coleção que é utilizada para os uploads de imagens
+- PAYLOAD_EXTEND_SITE_EXTERNAL_PATH_UPLOADS: Caminho da raiz do site até a pasta onde ficam as imagens, exemplo: "/uploads/noticias/"
 
 ### Tipos
 
