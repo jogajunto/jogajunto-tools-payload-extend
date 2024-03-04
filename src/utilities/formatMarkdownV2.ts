@@ -5,6 +5,7 @@ import { Document } from 'payload/types';
 
 // Import utilities for rich text processing and YAML serialization
 import {
+  UploadNode,
   defaultEditorConfig,
   defaultEditorFeatures,
   getEnabledNodes,
@@ -15,7 +16,11 @@ import yaml from 'js-yaml';
 
 // Import functions for headless text editor and Markdown conversion
 import { createHeadlessEditor } from '@lexical/headless';
-import { $convertToMarkdownString } from '@lexical/markdown';
+import {
+  $convertToMarkdownString,
+  ElementTransformer,
+} from '@lexical/markdown';
+import imagesForConvertNodeToMarkdown from './imagesForConvertNodeToMarkdown';
 
 /**
  * Transforms a Payload CMS document into a Markdown formatted string with YAML front matter.
@@ -57,6 +62,9 @@ const formatMarkdownV2 = async (
     throw new Error(`Formatter for collection "${collectionName}" not found.`);
   }
 
+  // Path upload for use in src image
+  const pathUploads = process.env.PAYLOAD_EXTEND_SITE_EXTERNAL_PATH_UPLOADS;
+
   // Format the document data using the provided formatter
   const data = await dataFormatter(doc, payload);
 
@@ -89,6 +97,44 @@ const formatMarkdownV2 = async (
       const editorState =
         typeof doc.content === 'string' ? JSON.parse(doc.content) : doc.content;
 
+      const objectIdsInImages = await imagesForConvertNodeToMarkdown(
+        doc,
+        payload
+      );
+
+      // Defining the transformer
+      const imageUploadTransformer: ElementTransformer = {
+        dependencies: [UploadNode], // Depend on your custom UploadNode for images
+        export: (node) => {
+          // Check if the node is an instance of UploadNode to ensure it's an image
+          if (node instanceof UploadNode) {
+            // Retrieve the image data using the node's ID
+            const nodeId = node.getData().value.id;
+            const imageData = objectIdsInImages[nodeId]; // Assuming nodeData.id is how you access the ID
+
+            if (imageData) {
+              // Construct the Markdown string for the image
+              const alt = imageData.alt || '';
+              const url = `${pathUploads}${imageData.filename}`;
+              let markdownImage = `![${alt}](${url})`;
+
+              // If there's a link associated with the image, encapsulate the image markdown in a link markdown
+              if (imageData.link) {
+                markdownImage = `[${markdownImage}](${imageData.link})`;
+              }
+
+              return markdownImage;
+            }
+          }
+          return null; // Return null for non-image nodes
+        },
+        regExp: /.../, // Your regex here, if needed for identification
+        replace: (parentNode, children, match, isImport) => {
+          // Implementation of the replace function, if needed
+        },
+        type: 'element',
+      };
+
       // Set the editor state for conversion
       headlessEditor.setEditorState(
         headlessEditor.parseEditorState(editorState)
@@ -97,6 +143,11 @@ const formatMarkdownV2 = async (
       // Convert the editor state to Markdown string
       let markdown = '';
       headlessEditor.getEditorState().read(() => {
+        if (Object.keys(objectIdsInImages).length > 0) {
+          yourSanitizedEditorConfig?.features?.markdownTransformers.push(
+            imageUploadTransformer
+          );
+        }
         markdown = $convertToMarkdownString(
           yourSanitizedEditorConfig?.features?.markdownTransformers
         );
