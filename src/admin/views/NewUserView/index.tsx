@@ -11,7 +11,7 @@ import Text from 'payload/dist/admin/components/forms/field-types/Text';
 import ConfirmPassword from 'payload/dist/admin/components/forms/field-types/ConfirmPassword';
 import HiddenInput from 'payload/dist/admin/components/forms/field-types/HiddenInput';
 import Submit from 'payload/dist/admin/components/forms/Submit';
-import { AdminView } from 'payload/config';
+import { AdminViewComponent } from 'payload/config';
 import { UserType } from '../../../types/UserType';
 
 /**
@@ -25,7 +25,7 @@ const useQuery = () => {
 /**
  * Componente responsável por criar um novo usuário a partir de um token válido.
  */
-const NewUser: AdminView = () => {
+const NewUser: AdminViewComponent = () => {
   const config = useConfig();
   const {
     admin: { user: userSlug, logoutRoute },
